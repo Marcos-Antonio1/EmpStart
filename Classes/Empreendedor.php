@@ -4,10 +4,41 @@ require_once('Usuario.php');
 
 class Empreendedor extends Usuario {
 
-	public function __construct(string $nome, int $telefone,  string $email, string $areas_interesse, string $descricao, string $localizacao) {
-		parent::__construct($nome, $telefone, $email, $areas_interesse, $descricao, $localizacao);
+	private $requisicoes_investimento;
+
+	public function __construct(string $nome,  string $email, string $login, string $senha, string $localizacao, string $area_atuacao) {
+		$this->requisicoes_investimento = array;
+		parent::__construct($nome, $email, $login, $senha, $localizacao, $area_atuacao);
 	}
+
+	public function criarProjeto() : bool {
+
+	}
+
+	public function procurarInvestidor($nome) : array {
+
+	}
+
+	public function indicarProjeto(Investidor $investidor, Projeto $projeto) : bool {
+
+	}
+
+	public function alterarDadosDoProjeto() : bool {
+
+	}
+
+	public function excluirInvestidor(Investidor $investidor, Projeto $projeto) : bool {
+
+	}
+
+	public function verificarRequisicoes() : void {
+
+	}
+
+	public function adicionarInvestidor() : bool {
+
+	}
+
+
 }
-
-
 ?>

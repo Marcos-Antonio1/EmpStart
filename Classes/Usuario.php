@@ -4,21 +4,36 @@
 abstract class Usuario {
 
 	private $nome;
-	private $telefone;
 	private $email;
-	private $areas_interesse;
-	private $descricao;
+	private $login;
+	private $senha;
 	private $localizacao;
+	private $area_atuacao;
+	//private $telefone;
 	// imagem de perfil.
 
 
-	public function __construct(string $nome, string $telefone,  string $email, string $areas_interesse, string $descricao, string $localizacao) {
+	public function __construct(string $nome, string $email, string $login, string $senha, string $localizacao, string $area_atuacao) {
 		$this->nome = $nome;
-		$this->telefone = $telefone;
 		$this->email = $email;
-		$this->areas_interesse = $areas_interesse; // Aqui vai ter que ser um array. Depois falamos como que vamos fazer. 
-		$this->descricao = $descricao;
+		$this->login = $login;
+		$this->senha = $senha;
 		$this->localizacao = $localizacao;
+		$this->area_atuacao  = $area_atuacao; // Será uma ou mais de uma? se for mais de 1, é array. 
+		
+		//$this->telefone = $telefone;
+	}
+
+	abstract public function AvaliarProjetos() : void {
+
+	}
+
+	abstract public function BuscarProjetos(): array {
+
+	}
+
+	abstract public function ProcurarUsuarios($nome) : array {
+
 	}
 
 	abstract public function get($propriedade) {
