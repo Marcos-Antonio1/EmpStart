@@ -1,12 +1,29 @@
-<?php  
-
-
-abstract class Usuario {
-
+<?php 
+namespace Classes;
+spl_autoload_register(function($classname){
+	require_once str_replace("Classes\\","","Classes\Usuario") .".php";
+});
+class Usuario {
+	private $usuarioId;
 	private $nome;
 	private $email;
 	private $login;
 	private $senha;
+<<<<<<< HEAD
+	private $areaLocalizao;
+	private $areaInteresse =array();
+	private $telefone;
+
+	public function __construct(String $nome, String $email, String $login, String $senha, String $areaLocalizao, $areaInteresse, String $telefone)
+	{
+		$this->nome= $nome;
+		$this->email= $email;
+		$this->login= $login;
+		$this->senha= $senha;
+		$this->areaLocalizao= $areaLocalizao;
+		$this->areaInteresse =$areaInteresse;
+		$this->telefone=$telefone;
+=======
 	private $localizacao;
 	private $area_atuacao;
 	//private $telefone;
@@ -34,17 +51,12 @@ abstract class Usuario {
 
 	abstract public function ProcurarUsuarios($nome) : array {
 
+>>>>>>> 52e39c40020cbf9295ebf42d3d1e38a9e73970cd
 	}
+	public function AvaliarProjetos($idProjeto,$avaliacao){
 
-	abstract public function get($propriedade) {
-		return $this->{$propriedade};
 	}
+	public function BuscarProjetos(){
 
-	abstract public function set($propriedade, $new) {
-		$this->{$propriedade} = $new;
 	}
-
 }
-
-
-?>
