@@ -30,47 +30,10 @@ class Empreendedor extends Usuario{
 
 	public function alterarDadosDoProjeto() : bool {
 
-<<<<<<< HEAD
-=======
-	private $requisicoes_investimento;
-
-	public function __construct(string $nome,  string $email, string $login, string $senha, string $localizacao, string $area_atuacao) {
-		$this->requisicoes_investimento = array;
-		parent::__construct($nome, $email, $login, $senha, $localizacao, $area_atuacao);
-	}
-
-	public function criarProjeto() : bool {
-
-	}
-
-	public function procurarInvestidor($nome) : array {
-
-	}
-
-	public function indicarProjeto(Investidor $investidor, Projeto $projeto) : bool {
-
-	}
-
-	public function alterarDadosDoProjeto() : bool {
-
 	}
 
 	public function excluirInvestidor(Investidor $investidor, Projeto $projeto) : bool {
 
-	}
-
-	public function verificarRequisicoes() : void {
-
-	}
-
-	public function adicionarInvestidor() : bool {
-
->>>>>>> 52e39c40020cbf9295ebf42d3d1e38a9e73970cd
-	}
-
-	public function excluirInvestidor(Investidor $investidor, Projeto $projeto) : bool {
-
-<<<<<<< HEAD
 	}
 
 	public function verificarRequisicoes() : void {
@@ -87,7 +50,4 @@ class Empreendedor extends Usuario{
 $user=new Usuario('asad','adsda','adsdas','dasda','adsdad','23121','dasda');
 $user->criarProjeto('add','adsda','321','312312','adsda');
 $user->mostrarTodosOsProjetos();
-=======
-}
->>>>>>> 52e39c40020cbf9295ebf42d3d1e38a9e73970cd
 ?>
