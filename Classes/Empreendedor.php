@@ -1,11 +1,10 @@
 <?php
-namespace Classes;
- 
+namespace Classes; 
 spl_autoload_register(function($classname){
-	require_once str_replace("Classes\\","","Classes\Usuario") .".php";
+	require_once  str_replace("/Classes","/",__DIR__).str_replace("\\","/",$classname).".php";
 });
 use Classes\Usuario;
-use Classes\Projeto;
+use Classes\Bd;
 class Empreendedor extends Usuario{
 
 	private $requisicoes_investimento;
@@ -17,8 +16,7 @@ class Empreendedor extends Usuario{
 	}
 
 	public function criarProjeto(string $nome, string $telefone, string $email, string $area_atuacao, string $descricao)  {
-		$projeto=new Projeto($nome,$telefone,$email,$area_atuacao,$descricao);
-		array_push($this->projetos,$projeto);
+		
 	}
 
 	public function procurarInvestidor($nome){
@@ -47,7 +45,5 @@ class Empreendedor extends Usuario{
 		var_dump($this->projetos);
 	}
 }
-$user=new Usuario('asad','adsda','adsdas','dasda','adsdad','23121','dasda');
-$user->criarProjeto('add','adsda','321','312312','adsda');
-$user->mostrarTodosOsProjetos();
+
 ?>

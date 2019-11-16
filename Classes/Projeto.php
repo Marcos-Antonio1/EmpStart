@@ -1,8 +1,11 @@
 <?php  
 namespace Classes;
 spl_autoload_register(function($classname){
-	require_once str_replace("Classes\\","","Classes\Usuario") .".php";
+	require_once  str_replace("/Classes","/",__DIR__).str_replace("\\","/",$classname).".php";
 });
+
+use Classes\Bd;
+use Classes\Usuario;
 
 class Projeto{
 	//private $telefone;
