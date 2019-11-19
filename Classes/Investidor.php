@@ -8,7 +8,7 @@ use Classes\Usuario;
 use Classes\Bd;
 
 class Investidor extends Usuario {
-
+	private $idInvestidor;
 	private $disponibilidade; // Isso seria para a parte de receber ou não indicações.
 	private $indicacoes;// implementar depois
 	private $orcamentoInvestido;
@@ -16,15 +16,26 @@ class Investidor extends Usuario {
 	private $pedidosDeParcerias;// implementar depois 
 
 
-	public function __construct(string $nome,  string $email, string $login, string $senha, string $localizacao, string $area_atuacao,$telefone) {
-		$this->disponibilidade = true;		
-		$this->indicacoes = array();
-		$this->orcamentoInvestido = 0;
+	public function __construct($id_investidor='',String $nome, String $email, String $login, String $senha, String $localizacao,  String $telefone, String $outrosMeiosDecontato,$areaInteresse,$imagem="",$disponibilidade=true,$orcamentoInvestido=0) {
+		$this->idInvestidor=$id_investidor;
+		$this->disponibilidade = $disponibilidade;		
+		//$this->indicacoes = array();
+		$this->orcamentoInvestido = $orcamentoInvestido;
 		$this->parcerias = array();
-		$this->pedidosDeParcerias = array();
-		parent::__construct($nome, $email, $login, $senha, $localizacao, $area_atuacao,$telefone);
+		//$this->pedidosDeParcerias = array();
+		parent::__construct($nome,$email, $login,$senha,$localizacao,$telefone, $outrosMeiosDecontato,$areaInteresse,$imagem="");
 }
+	public function cadastrar(){
 
+	}
+
+	public function listarProjetos()
+	{
+		
+	}
+	public function atualizarDados(){
+
+	}
 	public function investirEmProjeto(int $idProjeto, $valor) : bool {
 
 	}
