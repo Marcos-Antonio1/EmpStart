@@ -13,7 +13,7 @@ use Classes\Projeto;
 class Empreendedor extends Usuario{
 	private $idEmpreendedor;
 	private $requisicoes_investimento;
-	private $projetos=array();
+	public $projetos=array();
 
 	public function __construct(String $nome, String $email, String $login, String $senha, String $localizacao,  String $telefone, String $outrosMeiosDecontato,$areaInteresse,$imagem="") {
 		$this->requisicoes_investimento = array();
@@ -66,7 +66,7 @@ class Empreendedor extends Usuario{
 		try{
 			$listar=$conexao->prepare("select * from projeto where fk_empreendedor_projeto = :id;");
 			$listar->execute(array(
-				"id"=>$this->idEmpreendedor,
+				"id"=>1,
 			)); 
 			$projetos=$listar->fetchAll(PDO::FETCH_OBJ);
 			foreach($projetos as $projeto){
@@ -80,8 +80,8 @@ class Empreendedor extends Usuario{
 	}
 	public function listarProjetos(){
 		$this->CarregarProjetos();
-		//var_dump($this->projetos); //reajustar depois,para interface grafica
-		$this->projetos['1']->mostrarInvestidores();
+		var_dump($this->projetos); 
+		
 	}
 	public function atualizarDados( $dados=array(),$valores=array())
 	{
@@ -111,6 +111,4 @@ class Empreendedor extends Usuario{
 
 	}
 }
-	$em=new Empreendedor('quaquer','dada@adas','adas','dadsa','adsdas','dasdas','sadasd','dadsad');
-	$em->listarProjetos();
 ?>
