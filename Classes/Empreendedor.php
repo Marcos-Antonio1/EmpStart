@@ -15,28 +15,30 @@ class Empreendedor extends Usuario{
 	private $requisicoes_investimento;
 	public $projetos=array();
 
-	public function __construct(String $nome, String $email, String $login, String $senha, String $localizacao,  String $telefone, String $outrosMeiosDecontato,$areaInteresse,$imagem="") {
+	public function __construct( $idEmpreendedor = "" ,String $nome, String $email, String $login, String $senha, String $localizacao,  String $telefone, String $outrosMeiosDecontato,$areaInteresse,$imagem="") {
 		$this->requisicoes_investimento = array();
 		parent::__construct( $nome,  $email, $login, $senha,$localizacao,$telefone,$outrosMeiosDecontato,$areaInteresse,$imagem);
 		$projetos=array();
 	}
 	public function criarProjeto(Projeto $projeto)  {
+		var_dump($projeto);
 		$pdo=new Bd();
 		$conexao=$pdo->abrirConexao();
 		try{
-			$cadastrar=$conexao->prepare("insert into projeto(nome,descricao,disponibilidade_para_investimentos,orcamento,areaatuacao,fk_empreendedor_projeto)values(:nome,:descricao,:disponibilidade,:orcamento,:areaatuacao,:fk_empreendedor_projeto)");
+			$cadastrar=$conexao->prepare("insert into projeto(nome,descricao,disponibilidade_para_investimentos,orcamento,avaliacao,areaatuacao,fk_empreendedor_projeto)values(:nome,:descricao,:disponibilidade,:oracamento,:avaliacao,:areaatuacao,:fk_empreendedor_projeto);
+			");
 			$cadastrar->execute(array(
 				":nome" =>$projeto->nome,
 				":descricao" =>$projeto->descricao,
-				":disponibilidade" =>$projeto->descricao,
+				":disponibilidade" =>$projeto->disponibilidade_para_investimentos,
 				":orcamento" => $projeto->orcamento,
+				":avaliacao"=>0,
 				":areaatuacao"=> $this->areaInteresse,
-				":fk_empreendedor_projeto" =>$this->idEmpreendedor,
+				":fk_empreendedor_projeto" =>1,
 			));
-			echo "deu certo";
+			
 		}catch(PDOException $e){
 			echo $e->getMessage();
-			echo "deu erraado";
 		}
 	}
 	public function cadastrar()
@@ -66,7 +68,7 @@ class Empreendedor extends Usuario{
 		try{
 			$listar=$conexao->prepare("select * from projeto where fk_empreendedor_projeto = :id;");
 			$listar->execute(array(
-				"id"=>1,
+				"id"=>$this->idEmpreendedor,
 			)); 
 			$projetos=$listar->fetchAll(PDO::FETCH_OBJ);
 			foreach($projetos as $projeto){
@@ -111,4 +113,7 @@ class Empreendedor extends Usuario{
 
 	}
 }
+$em=new Empreendedor('ca','adasd@adsdas','fkonline','coxinha','perto de ti','12312','sinal de fumaça','automotivo');
+$projeto= new Projeto(1,'qualquer','caça e pesca',true,0,10,'inovação',1);
+$em->criarProjeto($projeto);
 ?>
