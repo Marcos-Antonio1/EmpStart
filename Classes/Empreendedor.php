@@ -83,12 +83,12 @@ class Empreendedor extends Usuario{
 		var_dump($this->projetos); 
 		
 	}
+
 	public function atualizarDados( $dados=array(),$valores=array())
 	{
 
 	}
-	
-	
+
 	public function procurarInvestidor($nome){
 
 	}

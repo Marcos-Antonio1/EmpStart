@@ -86,7 +86,4 @@ class Projeto{
 	}
 
 }
-
-$projeto= new Projeto(1,'qualquer','outro',true,10,'ok','foi','1');
-//$projeto->mostrarInvestidores();
 ?>
