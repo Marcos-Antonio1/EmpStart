@@ -38,7 +38,7 @@
   </nav>
 
   <!-- Page Content -->
-  <div class="container">
+  <div class="container-fluid">
 
     <!-- Heading Row -->
     <div class="row align-items-center my-5">

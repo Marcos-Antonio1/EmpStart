@@ -28,7 +28,6 @@ class Investidor extends Usuario {
 	public function cadastrar(){
 
 	}
-
 	public function listarProjetos()
 	{
 		

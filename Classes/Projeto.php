@@ -11,16 +11,16 @@ use PDO;
 use PDOException;
 
 class Projeto{
-	public $idprojeto;
-	public $nome;
-	public $descricao;
-	public $disponibilidade_para_investimentos;
-	public $orcamento;
-	public $avaliacao;
-	public $areaatuacao;
-	public $fk_empreendedor;
-	public $imagem;	
-	public $investidores=array();
+	private $idprojeto;
+	private $nome;
+	private $descricao;
+	private $disponibilidade_para_investimentos;
+	private $orcamento;
+	private $avaliacao;
+	private $areaatuacao;
+	private $fk_empreendedor;
+	private $imagem;	
+	private $investidores=array();
 	
 	public function __construct($idprojeto="", String $nome, String $descricao, bool $disponibilidade_para_investimentos,float $orcamento=0,$avaliacao,string $areaAtuacao,$fk_empreendedor_projeto,$imagem="") {
 		$this->idprojeto=$idprojeto;
@@ -34,9 +34,9 @@ class Projeto{
 		$this->avaliacao = $avaliacao;
 		$this->fk_empreendedor=$fk_empreendedor_projeto;
 		$this->imagem=$imagem;
-		/*if($idprojeto!=""){
+		if($idprojeto!=""){
 			$this->setarInvestidoresAoObjetoProjeto();
-		} */
+		} 
 	}
 
 	public function setarInvestidoresAoObjetoProjeto(){
@@ -68,15 +68,7 @@ class Projeto{
 	public function mostrarInvestidores(){
 		var_dump($this->investidores); // implementar para interface gráfica depois
 	}
-	/* 
-	public function adicionarInvestidor() : bool {
 
-	}
-
-	public function removerInvestidor() : bool {
-
-	}
- */
 	public function receberInvestimento() : void {
 
 	}
@@ -85,5 +77,18 @@ class Projeto{
 
 	}
 
+	public function __get($name)
+	{
+		return $this->$name;
+	}
+		/* 
+	public function adicionarInvestidor() : bool {
+
+	}
+
+	public function removerInvestidor() : bool {
+
+	}
+ */
 }
 ?>

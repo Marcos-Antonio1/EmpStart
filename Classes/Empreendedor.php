@@ -1,6 +1,5 @@
 <?php
 namespace Classes;
-require_once("Projeto.php");
 spl_autoload_register(function($classname){
 	require_once  str_replace("/Classes","/",__DIR__).str_replace("\\","/",$classname).".php";
 });
@@ -15,26 +14,25 @@ class Empreendedor extends Usuario{
 	private $requisicoes_investimento;
 	public $projetos=array();
 
-	public function __construct( $idEmpreendedor = "" ,String $nome, String $email, String $login, String $senha, String $localizacao,  String $telefone, String $outrosMeiosDecontato,$areaInteresse,$imagem="") {
+	public function __construct(String $nome, String $email, String $login, String $senha, String $localizacao,  String $telefone, String $outrosMeiosDecontato,$areaInteresse,$imagem="") {
 		$this->requisicoes_investimento = array();
 		parent::__construct( $nome,  $email, $login, $senha,$localizacao,$telefone,$outrosMeiosDecontato,$areaInteresse,$imagem);
 		$projetos=array();
 	}
 	public function criarProjeto(Projeto $projeto)  {
-		var_dump($projeto);
 		$pdo=new Bd();
 		$conexao=$pdo->abrirConexao();
 		try{
-			$cadastrar=$conexao->prepare("insert into projeto(nome,descricao,disponibilidade_para_investimentos,orcamento,avaliacao,areaatuacao,fk_empreendedor_projeto)values(:nome,:descricao,:disponibilidade,:oracamento,:avaliacao,:areaatuacao,:fk_empreendedor_projeto);
+			$cadastrar=$conexao->prepare("insert into projeto(nome,descricao,disponibilidade_para_investimentos,orcamento,avaliacao,areaatuacao,fk_empreendedor_projeto)values(:nome,:descricao,:disponibilidade,:orcamento,:avaliacao,:areaatuacao,:fk_empreendedor_projeto);
 			");
 			$cadastrar->execute(array(
-				":nome" =>$projeto->nome,
-				":descricao" =>$projeto->descricao,
-				":disponibilidade" =>$projeto->disponibilidade_para_investimentos,
-				":orcamento" => $projeto->orcamento,
+				":nome" =>$projeto->__get('nome'),
+				":descricao" =>$projeto->__get('descricao'),
+				":disponibilidade" =>$projeto->__get('disponibilidade_para_investimentos'),
+				":orcamento" => $projeto->__get('orcamento'),
 				":avaliacao"=>0,
-				":areaatuacao"=> $this->areaInteresse,
-				":fk_empreendedor_projeto" =>1,
+				":areaatuacao"=> $projeto->__get('areaatuacao'),
+				":fk_empreendedor_projeto" =>$this->idEmpreendedor,
 			));
 			
 		}catch(PDOException $e){
@@ -85,35 +83,91 @@ class Empreendedor extends Usuario{
 		var_dump($this->projetos); 
 		
 	}
-
-	public function atualizarDados( $dados=array(),$valores=array())
-	{
+	public function atualizarDados( $dados=array(),$valores=array()):bool{  
+		$preparadorqueryAtributoseValores=array();
+		$interador=0;
+		while($interador<sizeof($dados)){
+			$preparadorqueryAtributoseValores[]=$dados[$interador]."="."'{$valores[$interador]}'";
+			$interador++;
+		}
+		$string=implode(",",$preparadorqueryAtributoseValores);
+		$pdo=new Bd();
+		$conexao=$pdo->abrirConexao();
+		try{
+			$update=$conexao->prepare("Update empreendedor set {$string} where idempreendedor=:id;");
+			$update->execute(array(
+				":id"=>$this->idEmpreendedor,
+			));
+			return true;
+		}catch(PDOException $e){
+			echo $e->getMessage();
+			return false;
+		} 
+	}
+	public function adicionarInvestidor() : bool {
 
 	}
+	public function alterarDadosDoProjeto($idProjeto,$dados=array(),$valores=array()) : bool {
+		$preparadorqueryAtributoseValores=array();
+		$interador=0;
+		while($interador<sizeof($dados)){
+			if(!is_numeric($valores[$interador])){
+				$preparadorqueryAtributoseValores[]=$dados[$interador]."="."'{$valores[$interador]}'";
+			}else{
+				$preparadorqueryAtributoseValores[]=$dados[$interador]."=".$valores[$interador];
+			}
+			$interador++;
+		}
+		$string=implode(",",$preparadorqueryAtributoseValores);
+		$pdo=new Bd();
+		$conexao=$pdo->abrirConexao();
+		try{
+			$update=$conexao->prepare("Update projeto set {$string} where idprojeto=:id;");
+			$update->execute(array(
+				":id"=>$idProjeto,
+			));
+			return true;
+		}catch(PDOException $e){
+			echo $e->getMessage();
+			return false;
+		} 
+	}
 
+	public function excluirInvestidor(int $idInvestidor, int $idProjeto) : bool {
+		$pdo=new Bd();
+		$conexao=$pdo->abrirConexao();
+		try{
+			$excluir=$conexao->prepare("DELETE from projeto_has_investidor where projeto_idprojeto=:idprojeto and investidor_idinvestidor=:idinvestidor;");
+			$excluir->execute(array(
+				":idprojeto"=>$idInvestidor,
+				":idinvestidor"=>$idProjeto
+			));
+			return true;
+		} catch(PDOException $e){
+			echo $e->getMessage();
+			return false;
+		}
+	}
+	public function excluirProjeto($idProjeto){
+
+	}
+/* 
+	public function verificarRequisicoes() : void {
+
+	}
 	public function procurarInvestidor($nome){
 
 	}
 	public function indicarProjeto( $investidor,  $projeto) : boolean {
 
 	}
-
-	public function alterarDadosDoProjeto() : bool {
-
-	}
-
-	public function excluirInvestidor(Investidor $investidor, Projeto $projeto) : bool {
-
-	}
-
-	public function verificarRequisicoes() : void {
-
-	}
-	public function adicionarInvestidor() : bool {
-
-	}
+ */
 }
-$em=new Empreendedor('ca','adasd@adsdas','fkonline','coxinha','perto de ti','12312','sinal de fumaça','automotivo');
-$projeto= new Projeto(1,'qualquer','caça e pesca',true,0,10,'inovação',1);
-$em->criarProjeto($projeto);
+/* $em=new Empreendedor('','adasd@adsdas','fkonline','coxinha','perto de ti','12312','sinal de fumaça','automotivo');
+//$projeto= new Projeto(1,'outrocoisa','caça e pesca',true,0,10,'informatica',1);
+//$em->criarProjeto($projeto);
+//$em->excluirInvestidor(1,1);
+$atualizar=['nome','descricao','avaliacao'];
+$dados=['Limpardordepratas','restaurar moedas antigas',20];
+$em->alterarDadosDoProjeto(1,$atualizar,$dados); */
 ?>
