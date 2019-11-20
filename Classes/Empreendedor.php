@@ -13,7 +13,6 @@ class Empreendedor extends Usuario{
 	private $idEmpreendedor;
 	private $requisicoes_investimento;
 	public $projetos=array();
-
 	public function __construct(String $nome, String $email, String $login, String $senha, String $localizacao,  String $telefone, String $outrosMeiosDecontato,$areaInteresse,$imagem="") {
 		$this->requisicoes_investimento = array();
 		parent::__construct( $nome,  $email, $login, $senha,$localizacao,$telefone,$outrosMeiosDecontato,$areaInteresse,$imagem);
@@ -80,14 +79,17 @@ class Empreendedor extends Usuario{
 	}
 	public function listarProjetos(){
 		$this->CarregarProjetos();
-		var_dump($this->projetos); 
-		
+		var_dump($this->projetos); 		
 	}
 	public function atualizarDados( $dados=array(),$valores=array()):bool{  
 		$preparadorqueryAtributoseValores=array();
 		$interador=0;
 		while($interador<sizeof($dados)){
-			$preparadorqueryAtributoseValores[]=$dados[$interador]."="."'{$valores[$interador]}'";
+			if(!is_numeric($valores[$interador])){
+				$preparadorqueryAtributoseValores[]=$dados[$interador]."="."'{$valores[$interador]}'";
+			}else{
+				$preparadorqueryAtributoseValores[]=$dados[$interador]."=".$valores[$interador];
+			}
 			$interador++;
 		}
 		$string=implode(",",$preparadorqueryAtributoseValores);
@@ -132,7 +134,6 @@ class Empreendedor extends Usuario{
 			return false;
 		} 
 	}
-
 	public function excluirInvestidor(int $idInvestidor, int $idProjeto) : bool {
 		$pdo=new Bd();
 		$conexao=$pdo->abrirConexao();
@@ -149,11 +150,24 @@ class Empreendedor extends Usuario{
 		}
 	}
 	public function excluirProjeto($idProjeto){
-
-	}
+		$pdo=new Bd();
+		$conexao=$pdo->abrirConexao();
+		try{
+			$dinheiro_investido=$conexao->prepare("Select quantidadeinvestida,investidor_idinvestidor from projeto_has_investidor where projeto_idprojeto:id");
+			$dinheiro_investido->execute(array(
+				":id"=>2
+			));
+			$dinheiro=$dinheiro_investido->fetch(PDO::FETCH_COLUMN);
+			$tiradinheiroinvestido=$conexao->prepare("update investidor set orcamentoinvestido=orcamentoinvestido - :dinheiro where idinvestidor=:id");
+				$tiradinheiroinvestido->execute(array(
+				":id"=>$idProjeto,
+			));
+		} catch(PDOException $e){
+			echo $e->getMessage();
+		}
+	}	
 /* 
 	public function verificarRequisicoes() : void {
-
 	}
 	public function procurarInvestidor($nome){
 
@@ -163,11 +177,12 @@ class Empreendedor extends Usuario{
 	}
  */
 }
-/* $em=new Empreendedor('','adasd@adsdas','fkonline','coxinha','perto de ti','12312','sinal de fumaça','automotivo');
+/* 
+ $em=new Empreendedor('','adasd@adsdas','fkonline','coxinha','perto de ti','12312','sinal de fumaça','automotivo');
 //$projeto= new Projeto(1,'outrocoisa','caça e pesca',true,0,10,'informatica',1);
 //$em->criarProjeto($projeto);
 //$em->excluirInvestidor(1,1);
 $atualizar=['nome','descricao','avaliacao'];
-$dados=['Limpardordepratas','restaurar moedas antigas',20];
-$em->alterarDadosDoProjeto(1,$atualizar,$dados); */
-?>
+$dados=['restaurador de pratas ','restaurar moedas antigas',20];
+$em->alterarDadosDoProjeto(3,$atualizar,$dados); 
+*/

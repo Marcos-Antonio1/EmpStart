@@ -16,7 +16,7 @@ class Investidor extends Usuario {
 	private $pedidosDeParcerias;// implementar depois 
 
 
-	public function __construct($id_investidor='',String $nome, String $email, String $login, String $senha, String $localizacao,  String $telefone, String $outrosMeiosDecontato,$areaInteresse,$imagem="",$disponibilidade=true,$orcamentoInvestido=0) {
+	public function __construct($id_investidor="",String $nome, String $email, String $login, String $senha, String $localizacao,  String $telefone, String $outrosMeiosDecontato,$areaInteresse,$imagem="",$disponibilidade=true,$orcamentoInvestido=0) {
 		$this->idInvestidor=$id_investidor;
 		$this->disponibilidade = $disponibilidade;		
 		//$this->indicacoes = array();
