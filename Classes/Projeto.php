@@ -43,9 +43,9 @@ class Projeto{
 		$pdo=new Bd();
 		$conexao=$pdo->abrirConexao();
 		try{
-			$buscar=$conexao->prepare("SELECT investidor_idinvestidor FROM projeto_has_investidor where projeto_idprojeto=:id and investimentoativo=true");
+			$buscar=$conexao->prepare("SELECT investidor_idinvestidor FROM projeto_has_investidor where projeto_idprojeto=:id");
 			$buscar->execute(array(
-				":id"=> $this->idprojeto,
+				":id"=> 1
 			));
 			$id_investidores=$buscar->fetchAll(PDO::FETCH_OBJ);
 			foreach($id_investidores as $id_investidor){
@@ -91,9 +91,4 @@ class Projeto{
 	}
  */
 }
-
-/* $projeto=new Projeto(2,'sdas','dasda',true,12,'sadasd','21312',1);
-$projeto->setarInvestidoresAoObjetoProjeto();
-$projeto->mostrarInvestidores();
- */
 ?>

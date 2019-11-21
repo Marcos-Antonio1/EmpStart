@@ -94,4 +94,12 @@ class Investidor extends Usuario {
 
 }
 
+
+$Investidor = new Investidor('joyce', 'joyce@gmail.com', 'joy', '123', 'currais novos', '9999-9999', 'link', 'TI');
+//$Investidor->cadastrar();
+//$Investidor->atualizarDados('login', 'novo');
+$att = ['nome', 'email', 'senha'];
+$dados = ['lalala', 'lalala@gmail.com', '1234'];
+$Investidor->atualizarDados($att, $dados);
+
 ?>
