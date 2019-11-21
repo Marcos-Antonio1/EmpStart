@@ -28,7 +28,7 @@ class Investidor extends Usuario {
 		$pdo=new Bd();
 		$conexao=$pdo->abrirConexao();
 		try{
-			$cadastrar=$conexao->prepare("insert into investidor (nome, email,login, senha, localizacao, telefone, outrosmeiosdecontato, areaatuacao, disponibilidade, orcamentoinvestido, idinvestidor) values (:nome, :email, :login, :senha, :localizacao, :telefone, :outrosmeiosdecontato, :areaatuacao, :disponibilidade, :orcamentoinvestido);
+			$cadastrar=$conexao->prepare("insert into investidor (nome, email,login, senha, localizacao, telefone, outrosmeiosdecontato, areaatuacao, disponibilidade, orcamentoinvestido) values (:nome, :email, :login, :senha, :localizacao, :telefone, :outrosmeiosdecontato, :areaatuacao, :disponibilidade, :orcamentoinvestido)
 			");
 			$cadastrar->execute(array(
 				":nome" =>$this->nome,
@@ -66,7 +66,7 @@ class Investidor extends Usuario {
 		$pdo=new Bd();
 		$conexao=$pdo->abrirConexao();
 		try{
-			$update=$conexao->prepare("Update investidor set {$string} where idinvestidor=:id;");
+			$update=$conexao->prepare("Update investidor set {$string} where idinvestidor=:id");
 			$update->execute(array(
 				":id"=>$this->idInvestidor,
 			));
@@ -94,12 +94,12 @@ class Investidor extends Usuario {
 
 }
 
-
+ /* 
 $Investidor = new Investidor('joyce', 'joyce@gmail.com', 'joy', '123', 'currais novos', '9999-9999', 'link', 'TI');
-//$Investidor->cadastrar();
+//$Investidor->cadastrar(); 
 //$Investidor->atualizarDados('login', 'novo');
-$att = ['nome', 'email', 'senha'];
+ $att = ['nome', 'email', 'senha'];
 $dados = ['lalala', 'lalala@gmail.com', '1234'];
-$Investidor->atualizarDados($att, $dados);
-
+$Investidor->atualizarDados($att, $dados); */
+ 
 ?>

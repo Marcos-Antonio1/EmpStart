@@ -22,7 +22,7 @@ class Projeto{
 	private $imagem;	
 	private $investidores=array();
 	
-	public function __construct($idprojeto="", String $nome, String $descricao, bool $disponibilidade_para_investimentos,float $orcamento=0,$avaliacao,string $areaAtuacao,$fk_empreendedor_projeto,$imagem="") {
+	public function __construct(String $nome, String $descricao, bool $disponibilidade_para_investimentos,float $orcamento=0,$avaliacao,string $areaAtuacao,$fk_empreendedor_projeto,$idprojeto='',$imagem="") {
 		$this->idprojeto=$idprojeto;
 		$this->nome=$nome ;
 		$this->descricao=$descricao ;
@@ -45,8 +45,8 @@ class Projeto{
 		try{
 			$buscar=$conexao->prepare("SELECT investidor_idinvestidor FROM projeto_has_investidor where projeto_idprojeto=:id");
 			$buscar->execute(array(
-				":id"=> 1
-			));
+				":id"=> $this->idprojeto,
+			));	
 			$id_investidores=$buscar->fetchAll(PDO::FETCH_OBJ);
 			foreach($id_investidores as $id_investidor){
 				$conexao=$pdo->abrirConexao();
@@ -68,27 +68,34 @@ class Projeto{
 	public function mostrarInvestidores(){
 		var_dump($this->investidores); // implementar para interface gráfica depois
 	}
-
-	public function receberInvestimento() : void {
-
+	public function MostrarOrcamento(){
+		$this->AtualizarOrcamento();
+		var_dump ($this->orcamento);
 	}
-
-	public function mostrarOrcamento() {
-
+	public function AtualizarOrcamento() {
+		$pdo=new Bd();
+		$conexao=$pdo->abrirConexao();
+		try{
+			$busca=$conexao->prepare("Select SUM(quantidadeinvestida) from projeto_has_investidor where projeto_idProjeto=:id and investimentoativo=:condicao");
+			$busca->execute(array(
+				":id"=>$this->idprojeto,
+				":condicao"=>'true',
+			));
+			$valores=$busca->fetchAll(PDO::FETCH_NUM);
+			foreach($valores as $valor){
+				$this->orcamento=intval($valor[0]);
+			}
+		}catch(PDOException $e){
+			echo $e->getMessage();
+		}
 	}
 
 	public function __get($name)
 	{
 		return $this->$name;
 	}
-		/* 
-	public function adicionarInvestidor() : bool {
-
-	}
-
-	public function removerInvestidor() : bool {
-
-	}
- */
 }
+
+$projeto=new Projeto(2,"quew",'1dasda',true,0,'adas','asdas',1);
+$projeto->mostrarOrcamento();
 ?>

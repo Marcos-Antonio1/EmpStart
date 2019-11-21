@@ -13,10 +13,13 @@ class Empreendedor extends Usuario{
 	private $idEmpreendedor;
 	private $requisicoes_investimento;
 	public $projetos=array();
-	public function __construct(String $nome, String $email, String $login, String $senha, String $localizacao,  String $telefone, String $outrosMeiosDecontato,$areaInteresse,$imagem="") {
+	public function __construct(String $nome, String $email, String $login, String $senha, String $localizacao,  String $telefone, String $outrosMeiosDecontato,$areaInteresse,$idEmpreendedor='',$imagem="") {
 		$this->requisicoes_investimento = array();
 		parent::__construct( $nome,  $email, $login, $senha,$localizacao,$telefone,$outrosMeiosDecontato,$areaInteresse,$imagem);
 		$projetos=array();
+	}
+	public function __get($nome){
+		return $this->$nome;
 	}
 	public function criarProjeto(Projeto $projeto)  {
 		$pdo=new Bd();
@@ -69,7 +72,7 @@ class Empreendedor extends Usuario{
 			)); 
 			$projetos=$listar->fetchAll(PDO::FETCH_OBJ);
 			foreach($projetos as $projeto){
-				$proje= new Projeto($projeto->idprojeto,$projeto->nome,$projeto->descricao,$projeto->disponibilidade_para_investimentos,$projeto->orcamento,$projeto->avaliacao,$projeto->areaatuacao,$projeto->fk_empreendedor_projeto,$projeto->imagem);
+				$proje= new Projeto($projeto->nome,$projeto->descricao,$projeto->disponibilidade_para_investimentos,$projeto->orcamento,$projeto->avaliacao,$projeto->areaatuacao,$projeto->fk_empreendedor_projeto,$projeto->idprojeto,$projeto->idprojeto,$projeto->imagem);
 				$this->projetos[]=$proje;
 			}
 			
@@ -219,17 +222,20 @@ class Empreendedor extends Usuario{
 	}
  */
 }
- /* 
- $em=new Empreendedor('','adasd@adsdas','fkonline','coxinha','perto de ti','12312','sinal de fumaça','automotivo');
-//$projeto= new Projeto(1,'outrocoisa','caça e pesca',true,0,10,'informatica',1);
+ 
+//$em=new Empreendedor('','adasd@adsdas','fkonline','coxinha06','perto de ti','12312','sinal de fumaça','automotivo');
+ //$em->cadastrar();
+ //$projeto= new Projeto(1,'outrocoisa','caça e pesca',true,0,10,'informatica',1);
 //$em->criarProjeto($projeto);
-//$em->excluirInvestidor(1,1);
-//$atualizar=['nome','descricao','avaliacao'];
-//$dados=['restaurador de pratas ','restaurar moedas antigas',20];
-//$em->alterarDadosDoProjeto(3,$atualizar,$dados); 
-//$em->excluirProjeto(10);
+//$em->excluirInvestidor(2,2);
+//$atualizar=['nome','email'];
+//$dados=['pinheiro','eusdsad@gmail.com.br'];
+//$em->atualizarDados($atualizar,$dados);
+//$em->alterarDadosDoProjeto(12,$atualizar,$dados); 
+//$em->excluirProjeto(12);
 //$em->excluirInvestidor(3,2);
 //$em->listarProjetos();
-$em->verificarRequisicoes();
-$em->adicionarInvestidor(2,2);
-$em->verificarRequisicoes(); */	
+//$em->verificarRequisicoes();
+//$em->adicionarInvestidor(2,2);
+//$em->verificarRequisicoes(); 
+//$em->avaliarProjetos(4,10);
