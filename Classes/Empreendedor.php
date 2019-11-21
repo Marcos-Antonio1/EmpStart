@@ -81,7 +81,7 @@ class Empreendedor extends Usuario{
 		$this->CarregarProjetos();
 		var_dump($this->projetos); 		
 	}
-	public function atualizarDados( $dados=array(),$valores=array()):bool{  
+	public function atualizarDados( $dados=array(),$valores=array()) : bool{  
 		$preparadorqueryAtributoseValores=array();
 		$interador=0;
 		while($interador<sizeof($dados)){
