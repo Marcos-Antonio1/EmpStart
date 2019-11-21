@@ -27,13 +27,13 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
+            <a class="nav-link" href="#">Usuarios</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Services</a>
+            <a class="nav-link" href="#">Projetos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
+            <a class="nav-link" href="#">junte-se a nós</a>
           </li>
         </ul>
       </div>
@@ -42,11 +42,15 @@
   <!--header -->
   <header class="masthead text-white text-center">
     <div class="overlay"></div>
-    <div class="container">
+    <div class="container ">
       <div class="row">
-        <div class="col-12 col-md-4  ">
+      <div class="col-12 col-md-8 font-weight-bold ">
+          <h1>informações</h1>
+          <h4 class="h4"> besteiras escrita</h4>
+        </div>
+        <div class="col-12 col-md-4 ">
           <div class="container">
-            <div id="login" class="signin-card text-white">
+            <div id="login" class="signin-card ">
               <h1 class="display1">Entrar </h1>
               <p class="subhead">Logue e veja o que há de novo </p>
               <form action="" method="" class="" role="form" class="login">
@@ -68,10 +72,6 @@
             </div>
             </form>
           </div>
-        </div>
-        <div class="col-12 col-md-8 texto">
-          <h1>informações</h1>
-          <h4 class="h4"> besteiras escrita</h2>
         </div>
       </div>
     </div>
