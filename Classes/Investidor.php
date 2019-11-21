@@ -87,9 +87,12 @@ class Investidor extends Usuario {
 	public function confirmarParceria() : bool {
 		 //implementar depois
 	}
-
 	public function mostrarPedidosDeParceria() : void {
 			//implementar depois
+	}
+
+	public function retirarInvestimento(){
+		
 	}
 
 }
