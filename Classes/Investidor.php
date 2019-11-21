@@ -53,7 +53,7 @@ class Investidor extends Usuario {
 
 }
 
-
+$in= ne
 
 
 ?>

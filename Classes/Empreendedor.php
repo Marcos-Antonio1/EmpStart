@@ -65,7 +65,7 @@ class Empreendedor extends Usuario{
 		try{
 			$listar=$conexao->prepare("select * from projeto where fk_empreendedor_projeto = :id;");
 			$listar->execute(array(
-				"id"=>$this->idEmpreendedor,
+				"id"=>1,
 			)); 
 			$projetos=$listar->fetchAll(PDO::FETCH_OBJ);
 			foreach($projetos as $projeto){
@@ -106,9 +106,54 @@ class Empreendedor extends Usuario{
 			return false;
 		} 
 	}
-	public function adicionarInvestidor() : bool {
-
+	public function verificarRequisicoes() : void {
+		if(sizeof($this->requisicoes_investimento)!=0){
+			unset($this->requisicoes_investimento);
+			$this->requisicoes_investimento=array();
+		}
+		$pdo=new Bd();
+		$conexao=$pdo->abrirConexao();
+		try{
+			$buscarProjetos=$conexao->prepare("SELECT idprojeto from projeto where fk_empreendedor_projeto=:id");
+			$buscarProjetos->execute(array(
+				":id"=>$this->idEmpreendedor,
+			));
+			$resultados=$buscarProjetos->fetchAll(PDO::FETCH_NUM);
+			foreach($resultados as $resultado){
+				$requisicoes=$conexao->prepare("SELECT investidor_idinvestidor,projeto_idprojeto FROM projeto_has_investidor where projeto_idprojeto= :idprojeto and investimentoativo= :condicao");
+				$requisicoes->execute(array(
+					"idprojeto"=>$resultado[0],
+					":condicao"=>'false',
+				));
+				$resultados1=$requisicoes->fetchAll(PDO::FETCH_NUM);
+				foreach($resultados1 as $resultado1){
+					if(sizeof($resultado1)!=0){
+						$this->requisicoes_investimento[]=$resultado1;
+					}
+				}
+				
+			}
+			var_dump($this->requisicoes_investimento);
+		}catch(PDOException $e){
+			echo $e->getMessage();
+		}
 	}
+	public function adicionarInvestidor($idProjeto,$idInvestidor) : bool {
+		$pdo=new Bd();
+		$conexao=$pdo->abrirConexao();
+		try{
+			$add=$conexao->prepare("UPDATE projeto_has_investidor set investimentoativo= :condicao where projeto_idprojeto=:idprojeto and investidor_idinvestidor=:idinvestidor");
+			$add->execute(array(
+				":condicao"=>'true',
+				":idprojeto"=>$idProjeto,
+				"idinvestidor"=>$idInvestidor
+			));
+			return true;
+		}catch(PDOException $e){
+			echo $e->getMessage();
+			return false;
+		}
+	}	
 	public function alterarDadosDoProjeto($idProjeto,$dados=array(),$valores=array()) : bool {
 		$preparadorqueryAtributoseValores=array();
 		$interador=0;
@@ -153,13 +198,13 @@ class Empreendedor extends Usuario{
 		$pdo=new Bd();
 		$conexao=$pdo->abrirConexao();
 		try{
-			$dinheiro_investido=$conexao->prepare("Select quantidadeinvestida,investidor_idinvestidor from projeto_has_investidor where projeto_idprojeto:id");
-			$dinheiro_investido->execute(array(
-				":id"=>2
+			$excluirDependenciaProjeto_investidor_has_projeto=$conexao->prepare("DELETE FROM projeto_has_investidor where projeto_idprojeto= :id;
+			");
+			$excluirDependenciaProjeto_investidor_has_projeto->execute(array(
+				":id"=>$idProjeto,
 			));
-			$dinheiro=$dinheiro_investido->fetch(PDO::FETCH_COLUMN);
-			$tiradinheiroinvestido=$conexao->prepare("update investidor set orcamentoinvestido=orcamentoinvestido - :dinheiro where idinvestidor=:id");
-				$tiradinheiroinvestido->execute(array(
+			$excluirProjeto=$conexao->prepare("DELETE FROM projeto where idprojeto=:id");
+			$excluirProjeto->execute(array(
 				":id"=>$idProjeto,
 			));
 		} catch(PDOException $e){
@@ -167,22 +212,24 @@ class Empreendedor extends Usuario{
 		}
 	}	
 /* 
-	public function verificarRequisicoes() : void {
-	}
 	public function procurarInvestidor($nome){
 
 	}
 	public function indicarProjeto( $investidor,  $projeto) : boolean {
-
 	}
  */
 }
-/* 
+ /* 
  $em=new Empreendedor('','adasd@adsdas','fkonline','coxinha','perto de ti','12312','sinal de fumaça','automotivo');
 //$projeto= new Projeto(1,'outrocoisa','caça e pesca',true,0,10,'informatica',1);
 //$em->criarProjeto($projeto);
 //$em->excluirInvestidor(1,1);
-$atualizar=['nome','descricao','avaliacao'];
-$dados=['restaurador de pratas ','restaurar moedas antigas',20];
-$em->alterarDadosDoProjeto(3,$atualizar,$dados); 
-*/
+//$atualizar=['nome','descricao','avaliacao'];
+//$dados=['restaurador de pratas ','restaurar moedas antigas',20];
+//$em->alterarDadosDoProjeto(3,$atualizar,$dados); 
+//$em->excluirProjeto(10);
+//$em->excluirInvestidor(3,2);
+//$em->listarProjetos();
+$em->verificarRequisicoes();
+$em->adicionarInvestidor(2,2);
+$em->verificarRequisicoes(); */	
