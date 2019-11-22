@@ -45,8 +45,9 @@
     <div class="container ">
       <div class="row">
       <div class="col-12 col-md-8 font-weight-bold ">
-          <h1>informações</h1>
-          <h4 class="h4"> besteiras escrita</h4>
+          <h1>Junte-se à nossa comunidade, para empreender e investir na nova economia de startups</h1>
+          <h4 class="h4">Crie o perfil da sua startup, inscreva-se e tenha a oportunidade
+            de fazer parcerias e negócios com grandes empresas e projetos inovadores.</h4>
         </div>
         <div class="col-12 col-md-4 ">
           <div class="container">
@@ -81,7 +82,7 @@
     <!-- Call to Action Well -->
     <div class="card text-white bg-secondary my-5 py-4 text-center">
       <div class="card-body">
-        <p class="text-white m-0">This call to action card is a great place to showcase some important information or display a clever tagline!</p>
+        <p class="text-white m-0 font-weight-bold">Encontre investidores e mentores como você, que ajudem uns aos outros, fazendo networking, parcerias e negócios entre si e com o ecossistema.</p>
       </div>
     </div>
 
@@ -90,11 +91,11 @@
       <div class="col-md-4 mb-5">
         <div class="card h-100">
           <div class="card-body">
-            <h2 class="card-title">Card One</h2>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+            <h2 class="card-title">Comece agora!</h2>
+            <p class="card-text">Crie o perfil da sua startup, ganhe visibilidade na comunidade e nas redes sociais, vire notícia e dê o seu start na nova economia.</p>
           </div>
           <div class="card-footer">
-            <a href="#" class="btn btn-primary btn-sm">More Info</a>
+            <a href="#" class="btn btn-info btn-sm">More Info</a>
           </div>
         </div>
       </div>
@@ -102,11 +103,11 @@
       <div class="col-md-4 mb-5">
         <div class="card h-100">
           <div class="card-body">
-            <h2 class="card-title">Card Two</h2>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod tenetur ex natus at dolorem enim! Nesciunt pariatur voluptatem sunt quam eaque, vel, non in id dolore voluptates quos eligendi labore.</p>
+            <h2 class="card-title">Procure Oportunidades</h2>
+            <p class="card-text">Confira os projetos disponíveis e descubra oportunidades de investimento em startups na sua área de interesse e mais.</p>
           </div>
           <div class="card-footer">
-            <a href="#" class="btn btn-primary btn-sm">More Info</a>
+            <a href="#" class="btn btn-info btn-sm">More Info</a>
           </div>
         </div>
       </div>
@@ -114,11 +115,11 @@
       <div class="col-md-4 mb-5">
         <div class="card h-100">
           <div class="card-body">
-            <h2 class="card-title">Card Three</h2>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+            <h2 class="card-title">Nossa Comunidade</h2>
+            <p class="card-text">Procure e conheça pessoas com ideias semelhantes às suas e contribua para gerar novas parcerias e disseminar conhecimento na nossa comunidade.</p>
           </div>
           <div class="card-footer">
-            <a href="#" class="btn btn-primary btn-sm">More Info</a>
+            <a href="#" class="btn btn-info btn-sm">More Info</a>
           </div>
         </div>
       </div>

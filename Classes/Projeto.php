@@ -98,4 +98,5 @@ class Projeto{
 
 $projeto=new Projeto(2,"quew",'1dasda',true,0,'adas','asdas',1);
 $projeto->mostrarOrcamento();
+
 ?>

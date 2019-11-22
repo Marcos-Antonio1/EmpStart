@@ -47,10 +47,10 @@ class Investidor extends Usuario {
 			echo $e->getMessage();
 		}
 	}
-	public function listarProjetos()
-	{
-		
+	public function listarProjetos() {		
+
 	}
+
 	public function atualizarDados($dados=array(),$valores=array()) : bool {
 		$preparadorqueryAtributoseValores=array();
 		$interador=0;
@@ -77,7 +77,35 @@ class Investidor extends Usuario {
 		} 
 	}
 	public function investirEmProjeto(int $idProjeto, $valor) : bool {
-		
+		$pdo=new Bd();
+		$conexao=$pdo->abrirConexao();
+		try{
+			$busca=$conexao->prepare("select * from projeto where idprojeto = :id;");
+			$busca->execute(array(
+				":id"=>$idProjeto,
+			));
+			$projeto=$busca->fetchAll(PDO::FETCH_OBJ);
+			$somandoorcamento = $projeto->_get('orcamento'); //pega o orcamento do objeto para somar abaixo:
+			$somandoorcamento += $valor;
+			$updateOrcamentoProjeto = $conexao->prepare("update orcamento set {$somandoorcamento} where idprojeto = :id");
+			$updateOrcamentoProjeto->execute(array(
+				":id"=>$idProjeto
+			));
+			$busca = $conexao->prepare("select quantidadeinvestida from projeto_has_investidor where investidor_idinvestidor = :id");
+			$busca->execute(array(
+				"id"=>$this->idInvestidor
+			));
+			$InvestimentoAtualNoProjeto = $busca->fetch(); // Essa soma a seguir seria possível assim? pq teria retonar um valor, não sei bem sobre fetch.
+			$InvestimentoAtualNoProjeto += $valor;
+			// Verificar se a query a seguir é válida:
+			$update = $conexao->prepare("update from projeto_has_investidor quantidadeinvestida set {$InvestimentoAtualNoProjeto} where investidor_idinvestidor = :id");
+			$update->execute(array(
+				":id"=>$this->idInvestidor
+			));
+						
+		}catch(PDOException $e){
+			echo $e->getMessage();
+		}
 	}
 
 	public function solicitarParceria() : void {
