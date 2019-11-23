@@ -1,13 +1,4 @@
-<<<<<<< HEAD
-<?php
-namespace Controladores;
-spl_autoload_register(function($classname){
-    $dir= str_replace("/Controladores","/",__DIR__);
-    require_once $dir .str_replace("\\","/",$classname).".php";
-});
-=======
 <?php include "template/header.php"?>
-
 <div class="card" style="margin: 40px" style="margin-top: 80px">
   <form class="container" style="margin: 30px;" method="POST" action="#">
     <div class="form-row">
@@ -45,4 +36,3 @@ spl_autoload_register(function($classname){
 </div>
 </body>
 <?php include "template/footer.php"?>
->>>>>>> b4e976e6381b28176b70d0a31ed7b3a082cca2e0

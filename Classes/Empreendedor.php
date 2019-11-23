@@ -215,13 +215,6 @@ class Empreendedor extends Usuario{
 			echo $e->getMessage();
 		}
 	}	
-/* 
-	public function procurarInvestidor($nome){
-
-	}
-	public function indicarProjeto( $investidor,  $projeto) : boolean {
-	}
- */
 }
  
 //$em=new Empreendedor('','adasd@adsdas','fkonline','coxinha06','perto de ti','12312','sinal de fumaça','automotivo');
