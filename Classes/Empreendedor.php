@@ -13,8 +13,9 @@ class Empreendedor extends Usuario{
 	private $idEmpreendedor;
 	private $requisicoes_investimento;
 	public $projetos=array();
-	public function __construct(String $nome, String $email, String $login, String $senha, String $localizacao,  String $telefone, String $outrosMeiosDecontato,$areaInteresse,$idEmpreendedor='',$imagem="") {
+	public function __construct(String $nome, String $email, String $login, String $senha, String $localizacao,  String $telefone,  $outrosMeiosDecontato,$areaInteresse,$idEmpreendedor='',$imagem="") {
 		$this->requisicoes_investimento = array();
+		$this->idEmpreendedor=$idEmpreendedor;
 		parent::__construct( $nome,  $email, $login, $senha,$localizacao,$telefone,$outrosMeiosDecontato,$areaInteresse,$imagem);
 		$projetos=array();
 	}

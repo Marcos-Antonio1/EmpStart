@@ -17,6 +17,7 @@ class Investidor extends Usuario {
 
 
 	public function __construct(String $nome, String $email, String $login, String $senha, String $localizacao,  String $telefone, String $outrosMeiosDecontato,$areaInteresse, $disponibilidade=true,$orcamentoInvestido=0, $imagem="", $id_investidor="") {
+		$this->idInvestidor=$id_investidor;
 		$this->disponibilidade = $disponibilidade;		
 		//$this->indicacoes = array();
 		$this->orcamentoInvestido = $orcamentoInvestido;

@@ -5,5 +5,3 @@ spl_autoload_register(function($classname){
     require_once $dir .str_replace("\\","/",$classname).".php";
 });
 
-
-

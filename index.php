@@ -54,21 +54,29 @@
             <div id="login" class="signin-card ">
               <h1 class="display1">Entrar </h1>
               <p class="subhead">Logue e veja o que há de novo </p>
-              <form action="" method="" class="" role="form" class="login">
+              <form action="Controladores/logar.php" method="post" class="login">
                 <div id="form-login-username" class="form-group">
-                  <input id="username" class="form-control" name="username" type="text" size="18" alt="login" required />
+                  <input id="username" class="form-control" name="login" type="text" size="18" alt="login" required />
                   <span class="form-highlight"></span>
                   <span class="form-bar"></span>
                   <label for="username" class="float-label">login</label>
                 </div>
                 <div id="form-login-password" class="form-group">
-                  <input id="passwd" class="form-control" name="password" type="password" size="18" alt="password" required>
+                  <input id="passwd" class="form-control" name="senha" type="password" size="18" alt="password" required>
                   <span class="form-highlight"></span>
                   <span class="form-bar"></span>
-                  <label for="password" class="float-label">password</label>
+                  <label for="password" class="float-label">senha</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input type="radio" id="customRadioInline1" name="radio" class="custom-control-input" value="E">
+                  <label class="custom-control-label" for="customRadioInline1">Empreendedor</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input type="radio" id="customRadioInline2" name="radio" class="custom-control-input" value="I">
+                  <label class="custom-control-label" for="customRadioInline2">Investidor</label>
                 </div>
                 <div>
-                  <button class="btn btn-block btn-info ripple-effect" type="submit" name="Submit" alt="sign in">Sign in</button>
+                  <button class="btn btn-block btn-info ripple-effect" type="submit" name="Submit" alt="sign in">Entrar</button>
                 </div>
             </div>
             </form>
@@ -138,7 +146,6 @@
     </div>
     <!-- /.container -->
   </footer>
-
   <script src="Views/assets/jquery-3.4.1.min.js"></script>
   <script src="Views/assets/bootstrap-4.3.1-dist/js/bootstrap.min.js"> </script>
 </body>
