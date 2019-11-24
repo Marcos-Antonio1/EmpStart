@@ -6,40 +6,16 @@ spl_autoload_register(function($classname){
 });
 
 use Classes\Bd;
+use Classes\Empreendedor;
+use Classes\Investidor;
 use PDOException;
 
 $pdo=new BD();
 $conexão=$pdo->abrirConexao();
 if($_POST["radio"]=="E"){
-    $buscar=$conexão->prepare("insert into empreendedor (nome, email, login, senha, localizacao, telefone, outrosmeiosdecontato, areaatuacao) values (:nome, :email, :login, :senha, :localizacao, :telefone, :outrosmeiosdecontato, :areaatuacao)");
-    try{
-    $buscar->execute(array(
-        ":nome"=>$_POST["nome"],
-        ":email"=>$_POST["email"],
-        ":login"=>$_POST["login"],
-        ":senha"=>$_POST["senha"],
-        ":localizacao"=>$_POST["cidade"],
-        ":telefone"=>$_POST["telefone"],
-        ":outrosmeiosdecontato"=>$_POST["outromeiodecontato"],
-        ":areaatuacao"=>$_POST["areainteresse"]
-    ));
-    } catch(PDOException $e){
-        echo $e->getMessage();
-    }
-} elseif ($_POST["radio"]=="I") {
-    $buscar=$conexão->prepare("insert into investidor (nome, email, login, senha, localizacao, telefone, outrosmeiosdecontato, areaatuacao) values (:nome, :email, :login, :senha, :localizacao, :telefone, :outrosmeiosdecontato, :areaatuacao)");
-    try{
-    $buscar->execute(array(
-        ":nome"=>$_POST["nome"],
-        ":email"=>$_POST["email"],
-        ":login"=>$_POST["login"],
-        ":senha"=>$_POST["senha"],
-        ":localizacao"=>$_POST["cidade"],
-        ":telefone"=>$_POST["telefone"],
-        ":outrosmeiosdecontato"=>$_POST["outromeiodecontato"],
-        ":areaatuacao"=>$_POST["areainteresse"]
-    ));
-    } catch(PDOException $e){
-        echo $e->getMessage();
-    }
+    $empreendedor = new Empreendedor($_POST["nome"], $_POST["email"], $_POST["login"],$_POST["senha"],$_POST["cidade"], $_POST["telefone"], $_POST["outromeiodecontato"], $_POST["areainteresse"]);
+    $empreendedor->cadastrar();
+} else {
+    $investidor = new Investidor($_POST["nome"], $_POST["email"], $_POST["login"],$_POST["senha"],$_POST["cidade"], $_POST["telefone"], $_POST["outromeiodecontato"], $_POST["areainteresse"]); 
+    $investidor->cadastrar();
 }
