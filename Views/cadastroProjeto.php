@@ -20,14 +20,14 @@
     </div>
     <h6 for="">Inicar projeto com disponibilidade para investimentos: </h6>
     <div class="form-check-inline">
-        <input class="form-check-input" type="radio" name="tipo" id="Empreendedor" value="opcao1" checked>
-        <label class="form-check-label" for="Empreendedor">
+        <input class="form-check-input" type="radio" name="tipo" id="disponivel" value="opcao1" checked>
+        <label class="form-check-label" for="disponivel">
           Disponível
         </label>
       </div>
       <div class="form-check-inline">
-        <input class="form-check-input" type="radio" name="tipo" id="Investidor" value="opcao2">
-        <label class="form-check-label" for="Investidor">
+        <input class="form-check-input" type="radio" name="tipo" id="indisponivel" value="opcao2">
+        <label class="form-check-label" for="indisponivel">
           Não disponível
         </label>
     </div>
