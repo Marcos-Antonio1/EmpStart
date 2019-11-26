@@ -22,12 +22,11 @@ class Projeto{
 	private $imagem;	
 	private $investidores=array();
 	
-	public function __construct(String $nome, String $descricao, bool $disponibilidade_para_investimentos,float $orcamento=0,$avaliacao,string $areaAtuacao,$fk_empreendedor_projeto,$idprojeto='',$imagem="") {
+	public function __construct(String $nome, String $descricao, bool $disponibilidade_para_investimentos,string $areaAtuacao,$imagem="",$fk_empreendedor_projeto='',$idprojeto='',float $orcamento=0,$avaliacao='') {
 		$this->idprojeto=$idprojeto;
 		$this->nome=$nome ;
 		$this->descricao=$descricao ;
 		$this->areaatuacao=$areaAtuacao;
-		$this->avaliacao=$avaliacao;
 		$this->disponibilidade_para_investimentos=$disponibilidade_para_investimentos;
 		$this->orcamento = $orcamento;
 		$this->investidores = array();

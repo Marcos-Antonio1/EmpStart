@@ -33,7 +33,7 @@
             <a class="nav-link" href="#">Projetos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">junte-se a nós</a>
+            <a class="nav-link" href="Views/cadastro.php">junte-se a nós</a>
           </li>
         </ul>
       </div>
@@ -127,7 +127,7 @@
             <p class="card-text">Procure e conheça pessoas com ideias semelhantes às suas e contribua para gerar novas parcerias e disseminar conhecimento na nossa comunidade.</p>
           </div>
           <div class="card-footer">
-            <a href="#" class="btn btn-info btn-sm">More Info</a>
+            <a href="#" class="btn btn-info btn-sm">More</a>
           </div>
         </div>
       </div>

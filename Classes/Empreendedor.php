@@ -26,7 +26,7 @@ class Empreendedor extends Usuario{
 		$pdo=new Bd();
 		$conexao=$pdo->abrirConexao();
 		try{
-			$cadastrar=$conexao->prepare("insert into projeto(nome,descricao,disponibilidade_para_investimentos,orcamento,avaliacao,areaatuacao,fk_empreendedor_projeto)values(:nome,:descricao,:disponibilidade,:orcamento,:avaliacao,:areaatuacao,:fk_empreendedor_projeto);
+			$cadastrar=$conexao->prepare("insert into projeto(nome,descricao,disponibilidade_para_investimentos,orcamento,avaliacao,areaatuacao,fk_empreendedor_projeto,imagem)values(:nome,:descricao,:disponibilidade,:orcamento,:avaliacao,:areaatuacao,:fk_empreendedor_projeto,:imagem)
 			");
 			$cadastrar->execute(array(
 				":nome" =>$projeto->__get('nome'),
@@ -36,6 +36,7 @@ class Empreendedor extends Usuario{
 				":avaliacao"=>0,
 				":areaatuacao"=> $projeto->__get('areaatuacao'),
 				":fk_empreendedor_projeto" =>$this->idEmpreendedor,
+				":imagem"=>$projeto->__get('imagem'),
 			));
 			
 		}catch(PDOException $e){
@@ -73,7 +74,7 @@ class Empreendedor extends Usuario{
 			)); 
 			$projetos=$listar->fetchAll(PDO::FETCH_OBJ);
 			foreach($projetos as $projeto){
-				$proje= new Projeto($projeto->nome,$projeto->descricao,$projeto->disponibilidade_para_investimentos,$projeto->orcamento,$projeto->avaliacao,$projeto->areaatuacao,$projeto->fk_empreendedor_projeto,$projeto->idprojeto,$projeto->idprojeto,$projeto->imagem);
+				$proje= new Projeto($projeto->nome,$projeto->descricao,$projeto->disponibilidade_para_investimentos,$projeto->areaatuacao,$projeto->imagem,$projeto->fk_empreendedor_projeto,$projeto->idprojeto,$projeto->orcamento,$projeto->avaliacao);
 				$this->projetos[]=$proje;
 			}
 			
@@ -217,7 +218,7 @@ class Empreendedor extends Usuario{
 	}	
 }
  
-//$em=new Empreendedor('','adasd@adsdas','fkonline','coxinha06','perto de ti','12312','sinal de fumaça','automotivo');
+//$em=new Empreendedor('adasd@adsdas','fkonline','coxinha06','perto de ti','12312','sinal de fumaça','automotivo',1);
  //$em->cadastrar();
  //$projeto= new Projeto(1,'outrocoisa','caça e pesca',true,0,10,'informatica',1);
 //$em->criarProjeto($projeto);

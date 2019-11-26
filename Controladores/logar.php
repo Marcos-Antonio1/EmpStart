@@ -11,9 +11,6 @@ use Classes\Investidor;
 use PDOException;
 use PDO;
 
-echo $_POST['login'];
-echo $_POST['senha'];
-echo $_POST['radio'];
 $pdo=new BD();
 $conexão=$pdo->abrirConexao();
 if($_POST['radio']=="E"){
@@ -31,7 +28,7 @@ if($_POST['radio']=="E"){
             //header('Location: ../Views/home.php');
             var_dump($empreendedor);
             session_start();
-            $_SESSION['usuario']= $usuario;
+            $_SESSION['usuario']= serialize($usuario);
             header("Location: ../Views/home.php");
         }else{
             $mensagem="usuario não cadastrado";
@@ -52,7 +49,7 @@ if($_POST['radio']=="E"){
                 $usuario=new Investidor($userinvestidor->nome,$userinvestidor->email,$userinvestidor->login,$userinvestidor->senha,$userinvestidor->localizacao,$userinvestidor->telefone,$userinvestidor->outrosmeiosdecontato,$userinvestidor->areaatuacao,$userinvestidor->disponibilidade,$userinvestidor->orcamentoinvestido,$userinvestidor->imagem,$userinvestidor->idinvestidor);
                 var_dump($investidor);
                 session_start();
-                $_SESSION['usuario']= $usuario;
+                $_SESSION['usuario']= serialize($usuario);
                 header("Location: ../Views/home.php");
             }else{
                 $mensagem="usuario não cadastrado";

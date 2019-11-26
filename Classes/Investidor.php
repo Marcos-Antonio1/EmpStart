@@ -181,7 +181,7 @@ class Investidor extends Usuario {
 	}
 }
 
-
+/* 
 $Investidor = new Investidor('joyce', 'joyce@gmail.com', 'joy', '123', 'currais novos', '9999-9999', 'link', 'TI','123',2,2,2);
-$Investidor->listarProjetos();
+$Investidor->listarProjetos(); */
 ?>
