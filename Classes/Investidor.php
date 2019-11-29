@@ -5,7 +5,7 @@ spl_autoload_register(function($classname){
 });
 
 use Classes\Usuario;
-use Classes\Bd;
+use Classes\Bd;	
 use PDO;
 use PDOException;
 use JsonSerializable;
@@ -65,7 +65,6 @@ class Investidor extends Usuario implements JsonSerializable {
 			));
 			$idsProjetos=$buscaidProjetos->fetchAll(PDO::FETCH_NUM);
 			 foreach($idsProjetos as $idProjeto){
-				 echo $idProjeto[0];
 				 $buscarProjeto=$conexao->prepare("SELECT * from projeto where idprojeto= :id");
 				 $buscarProjeto->execute(array(
 					 ":id"=>$idProjeto[0],

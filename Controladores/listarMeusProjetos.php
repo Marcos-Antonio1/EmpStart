@@ -14,9 +14,7 @@ if(isset($_SESSION)){
     $user= unserialize($_SESSION['usuario']);
     $user->CarregarProjetos();
     $dados=$user->__get('projetos');
-    //var_dump($dados);
      $resultado = json_encode($dados);
-     //var_dump($resultado);
      echo $resultado;
      
      //echo json_encode($resultado);    

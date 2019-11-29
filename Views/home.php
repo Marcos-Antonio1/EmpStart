@@ -66,9 +66,7 @@ require_once "../Controladores/autorizacao.php";
       <div class="container-fluid ml-5 mt-3">  
       <form class=" formulario form-inline my-2 my-lg-0 text-center">
             <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar </button>
-            <button class="btn btn-outline-success my-2 my-sm-0 ml-3" type="submit">Top 10 projetos em avaliação </button>       
-            <button class="btn btn-outline-success my-2 my-sm-0 ml-3" type="submit">Top 10 projetos em orçamento </button>       
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar </button>       
       </form>
       
         <div class="container">

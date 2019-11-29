@@ -75,7 +75,26 @@ $(function () {
       url: "../Controladores/CarregarProjetosInvestidos.php",
       dataType: "json",
       success: function (myinvestimentos) {
-        alert('deu certo')
+        for (let myprojets in myinvestimentos) {
+          myprojets = parseInt(myprojets)
+          $('.cards-projetos').append(`<div class="</div> col-12 col-md-6 mt-md-3" style="max-width: 540px;">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                <img src="${myinvestimentos[myprojets].imagem}" class="card-img" id='imagem-perfil' alt="">
+                </div>
+                <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">${myinvestimentos[myprojets].nome}</h5>
+                    <p class="card-text">${myinvestimentos[myprojets].descricao}</p>
+                    <p class="card-text"> Score: ${myinvestimentos[myprojets].avaliacao}</p>
+                    <p class="card-text"><small class="text-muted">${myinvestimentos[myprojets].areaatuacao}</small></p>
+                </div>
+                </div>
+                <button type="button" class="btn btn-primary btn-sm mr-3">Ver detalhes do projeto</button>
+                <button type="button" class="btn btn-primary btn-sm">ver Investidores</button> 
+            </div>
+        </div>`)
+        }
       },
       error: function () {
         alert('deu errado')
@@ -152,7 +171,6 @@ $(function () {
                 </form>
                 </div>`)
           $('.enviar').click(function () {
-            alert(nome.value)
             $.ajax({
               method: "POST",
               url: "../Controladores/atualizarDadosUsuarios.php",
@@ -200,7 +218,7 @@ $(function () {
                 <form class="formulario">
                   <div class="form-group">
                     <label for="exampleInputEmail1">localização</label>
-                    <input type="email" class="form-control" id="localizacao" name='localizacao' aria-describedby="emailHelp" required="required">
+                    <input type="text" class="form-control" id="localizacao" name='localizacao' aria-describedby="emailHelp" required="required">
                     <button type="button" class=" enviar btn btn-primary mt-2">Atualizar</button>
                     <button type="button" class="cancelar btn btn-danger mt-2"> Cancelar</button>
                     </div>
@@ -208,11 +226,10 @@ $(function () {
                 </div>`)
           $('.enviar').click(function () {
             $(this).parents('.mostrado').hide();
-            alert(localizacao.value)
             $.ajax({
               method: "POST",
               url: "../Controladores/atualizarDadosUsuarios.php",
-              data: { email: localizacao.value },
+              data: { localizacao: localizacao.value },
               success: function () {
                 alert('Atualização feita')
               },
@@ -228,18 +245,17 @@ $(function () {
                 <form class="formulario">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Telefone</label>
-                    <input type="email" class="form-control" id="telefone" name='telefone' aria-describedby="emailHelp" required="required" >
+                    <input type="text" class="form-control" id="telefone" name='telefone' aria-describedby="emailHelp" required="required" >
                     <button type="button" class=" enviar btn btn-primary mt-2">Atualizar</button>
                     <button type="button" class="cancelar btn btn-danger mt-2"> Cancelar</button>
                     </div>
                 </form>
                 </div>`)
           $('.enviar').click(function () {
-            alert(localizacao.value)
             $.ajax({
               method: "POST",
               url: "../Controladores/atualizarDadosUsuarios.php",
-              data: { email: localizacao.value },
+              data: { telefone: telefone.value },
               success: function () {
                 alert('Atualização feita')
               },
@@ -255,18 +271,17 @@ $(function () {
                 <form class="formulario">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Outros meios de contato</label>
-                    <input type="email" class="form-control" id="outrosmeiosdecontato" name='outrosmeiosdecontato' aria-describedby="emailHelp" required="required">
+                    <input type="text" class="form-control" id="outrosmeiosdecontato" name='outrosmeiosdecontato' aria-describedby="emailHelp" required="required">
                     <button type="button" class=" enviar btn btn-primary mt-2">Atualizar</button>
                     <button type="button" class="cancelar btn btn-danger mt-2"> Cancelar</button>
                     </div>
                 </form>
                 </div>`)
           $('.enviar').click(function () {
-            alert(outrosmeiosdecontato.value)
             $.ajax({
               method: "POST",
               url: "../Controladores/atualizarDadosUsuarios.php",
-              data: { email: outrosmeiosdecontato.value },
+              data: { outrosmeiosdecontato: outrosmeiosdecontato.value },
               success: function () {
                 alert('Atualização feita')
               },
