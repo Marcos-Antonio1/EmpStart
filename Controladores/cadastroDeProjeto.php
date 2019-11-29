@@ -13,10 +13,12 @@ if(isset($_POST)){
         $formatos=["png","jpeg","jpg"];
         $extensao=pathinfo($_FILES['imagem']['name'],PATHINFO_EXTENSION);
         if(in_array($extensao,$formatos)){
-            $local="/var/www/html/ProjetoPOO/Views/assets/imgProjeto/";
+            $base="/var/www/html";
+            $local="/ProjetoPOO/Views/assets/imgProjeto/";
             $temp= $_FILES['imagem']['tmp_name'];
             $newName=uniqid().".$extensao";
-            $novoEndereco="$local.$newName";
+            $urlparamostrarimagem="$local"."$newName";
+            $novoEndereco="$base". "$local" ."$newName";
             echo "$novoEndereco";
              if(move_uploaded_file($temp,$novoEndereco)){
                 $imagem_setada=true;
@@ -25,9 +27,10 @@ if(isset($_POST)){
     }
      $user=unserialize($_SESSION['usuario']);
     if($imagem_setada){
-        $projeto=new Projeto($_POST['nome'],$_POST['descricao'],$_POST['tipo'],$_POST['area'],"{$novoEndereco}");
+        $projeto=new Projeto($_POST['nome'],$_POST['descricao'],$_POST['tipo'],$_POST['area'],"{$urlparamostrarimagem}");
     }else{
         $projeto=new Projeto($_POST['nome'],$_POST['descricao'],$_POST['tipo'],$_POST['area']);
     }
-    $user->criarProjeto($projeto);   
+    $user->criarProjeto($projeto);
+    header('Location:../Views/home.php');
 }

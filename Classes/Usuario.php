@@ -43,11 +43,42 @@ abstract class Usuario {
 		} catch(PDOException $e){
 			echo $e->getMessage();
 		}
+	}
+	public function listarTop10(){
+		$listaTop10=array();
+		$pdo=new Bd();
+		$conexao=$pdo->abrirConexao();
+		try{
+			$listar=$conexao->prepare("select * from projeto ORDER BY avaliacao Desc limit 10");
+			$listar->execute(array(
+			)); 
+			$projetos=$listar->fetchAll(PDO::FETCH_OBJ);
+			foreach($projetos as $projeto){
+				$proje= new Projeto($projeto->nome,$projeto->descricao,$projeto->disponibilidade_para_investimentos,$projeto->areaatuacao,$projeto->imagem,$projeto->fk_empreendedor_projeto,$projeto->idprojeto,$projeto->orcamento,$projeto->avaliacao);
+				$listaTop10[]=$proje;
+				return $listaTop10;
+			}
+			
+		}catch(PDOException $e){
+			echo $e->getMessage();
+		}
 	}	
 	abstract public  function cadastrar();
 	
 	abstract public function listarProjetos();
 
-	abstract public function atualizarDados();
+    abstract public function atualizarDados($dado,$valor);
+	public function mostrarDados(){
+		return[
+			'nome'=>$this->nome,
+			'email'=>$this->email,
+			'login'=>$this->login,
+			'local'=>$this->localizacao,
+			'telefone'=>$this->telefone,
+			'outrosmeios'=>$this->outrosMeiosDecontato,
+			'area'=>$this->areaInteresse,
+			'imagem'=>$this->imagem,
+		];
+	}
 }
 

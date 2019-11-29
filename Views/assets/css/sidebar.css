@@ -50,3 +50,11 @@ body {
 #pd-cor{
   background-color: #343A40;
 }
+.img-propocional {
+  width: 100px;
+  
+}
+
+.selecionada{
+  color:yellow;
+}

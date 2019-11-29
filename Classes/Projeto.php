@@ -7,10 +7,11 @@ spl_autoload_register(function($classname){
 use Classes\Bd;
 use Classes\Usuario;
 use Classes\Investidor;
+use JsonSerializable;
 use PDO;
 use PDOException;
 
-class Projeto{
+class Projeto implements JsonSerializable{
 	private $idprojeto;
 	private $nome;
 	private $descricao;
@@ -22,7 +23,7 @@ class Projeto{
 	private $imagem;	
 	private $investidores=array();
 	
-	public function __construct(String $nome, String $descricao, bool $disponibilidade_para_investimentos,string $areaAtuacao,$imagem="",$fk_empreendedor_projeto='',$idprojeto='',float $orcamento=0,$avaliacao='') {
+	public function __construct(String $nome, String $descricao, $disponibilidade_para_investimentos,string $areaAtuacao,$imagem="",$fk_empreendedor_projeto='',$idprojeto='', $orcamento=0,$avaliacao='') {
 		$this->idprojeto=$idprojeto;
 		$this->nome=$nome ;
 		$this->descricao=$descricao ;
@@ -65,11 +66,11 @@ class Projeto{
 	}
 
 	public function mostrarInvestidores(){
-		var_dump($this->investidores); // implementar para interface gráfica depois
+		$this->investidores; // implementar para interface gráfica depois
 	}
 	public function MostrarOrcamento(){
 		$this->AtualizarOrcamento();
-		var_dump ($this->orcamento);
+		 return $this->orcamento;
 	}
 	public function AtualizarOrcamento() {
 		$pdo=new Bd();
@@ -93,9 +94,23 @@ class Projeto{
 	{
 		return $this->$name;
 	}
+
+	public function jsonSerialize() {
+        return [
+			'idprojeto' => $this->idprojeto,
+			'nome'=> $this->nome,
+			'descricao'=>$this->descricao,
+			'disponibilidade'=>$this->disponibilidade_para_investimentos,
+			'orcamento'=>$this->orcamento,
+			'avaliacao'=>$this->avaliacao,
+			'areatuacao'=>$this->areaatuacao,
+			'imagem'=>$this->imagem,	
+			'investidores'=>$this->investidores
+		];
+    }
 }
 
-$projeto=new Projeto(2,"quew",'1dasda',true,0,'adas','asdas',1);
+/* $projeto=new Projeto(2,"quew",'1dasda',true,0,'adas','asdas',1);
 $projeto->mostrarOrcamento();
-
+ */
 ?>

@@ -1,7 +1,7 @@
 <?php include "template/header.php"?>
 
 <div class="card" style="margin: 40px" style="margin-top: 80px">
-  <form class="container" style="margin: 30px;" method="POST" action="../Controladores/cadastroUsuario.php">
+  <form class="container" style="margin: 30px;" method="POST" action="../Controladores/cadastroUsuario.php" enctype="multipart/form-data" >
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="nome">Nome</label>
@@ -40,6 +40,10 @@
           <option>...</option>
         </select>
       </div>
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlFile1">insira uma imagem de perfil </label>
+      <input type="file" class="form-control-file" id='imgprojeto' name='imagem'>
     </div>
     <div class="form-check-inline">
         <input class="form-check-input" type="radio" name="radio" id="empreendedor" value="E" checked>

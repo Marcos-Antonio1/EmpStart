@@ -48,7 +48,7 @@ class Empreendedor extends Usuario{
 		$pdo=new Bd();
 		$conexao=$pdo->abrirConexao();
 		try{
-			$inserir=$conexao->prepare("insert into empreendedor(nome,email,login,senha,localizacao,telefone,outrosmeiosdecontato,areaatuacao) VALUES(:nome,:email,:login,:senha,:localizacao,:telefone,:outrosmeiosdecontato,:areaInterese);");
+			$inserir=$conexao->prepare("insert into empreendedor(nome,email,login,senha,localizacao,telefone,outrosmeiosdecontato,areaatuacao,imagem) VALUES(:nome,:email,:login,:senha,:localizacao,:telefone,:outrosmeiosdecontato,:areaInterese,:imagem);");
 			$inserir->execute(array(
 				":nome"=>$this->nome,
 				":email"=>$this->email,
@@ -57,7 +57,9 @@ class Empreendedor extends Usuario{
 				":localizacao"=> $this->localizacao,
 				":telefone"=>$this->telefone,
 				":outrosmeiosdecontato"=>$this->outrosMeiosDecontato,
-				":areaInterese"=>'qualquer'
+				":areaInterese"=>'qualquer',
+				":imagem"=>$this->imagem,
+				
 			));
 		} catch(PDOException $e){
 			echo $e->getMessage();
@@ -68,12 +70,13 @@ class Empreendedor extends Usuario{
 		$pdo=new Bd();
 		$conexao=$pdo->abrirConexao();
 		try{
-			$listar=$conexao->prepare("select * from projeto where fk_empreendedor_projeto = :id;");
+			$listar=$conexao->prepare("select * from projeto where fk_empreendedor_projeto = :id");
 			$listar->execute(array(
-				"id"=>1,
+				":id"=>$this->idEmpreendedor,
 			)); 
 			$projetos=$listar->fetchAll(PDO::FETCH_OBJ);
 			foreach($projetos as $projeto){
+				//String $nome, String $descricao, bool $disponibilidade_para_investimentos,string $areaAtuacao,$imagem="",$fk_empreendedor_projeto='',$idprojeto='',float $orcamento=0,$avaliacao=''
 				$proje= new Projeto($projeto->nome,$projeto->descricao,$projeto->disponibilidade_para_investimentos,$projeto->areaatuacao,$projeto->imagem,$projeto->fk_empreendedor_projeto,$projeto->idprojeto,$projeto->orcamento,$projeto->avaliacao);
 				$this->projetos[]=$proje;
 			}
@@ -84,32 +87,19 @@ class Empreendedor extends Usuario{
 	}
 	public function listarProjetos(){
 		$this->CarregarProjetos();
-		var_dump($this->projetos); 		
+		 return $this->projetos;	
 	}
-	public function atualizarDados( $dados=array(),$valores=array()) : bool{  
-		$preparadorqueryAtributoseValores=array();
-		$interador=0;
-		while($interador<sizeof($dados)){
-			if(!is_numeric($valores[$interador])){
-				$preparadorqueryAtributoseValores[]=$dados[$interador]."="."'{$valores[$interador]}'";
-			}else{
-				$preparadorqueryAtributoseValores[]=$dados[$interador]."=".$valores[$interador];
-			}
-			$interador++;
-		}
-		$string=implode(",",$preparadorqueryAtributoseValores);
+	public function atualizarDados( $dados,$valores) { 
 		$pdo=new Bd();
 		$conexao=$pdo->abrirConexao();
+		$query1=["update Empreendedor set ","$dados"," = ","$valores","where idempreendedor = ","$this->idEmpreendedor"];
+		$ini=implode("",$query1); 
 		try{
-			$update=$conexao->prepare("Update empreendedor set {$string} where idempreendedor=:id;");
-			$update->execute(array(
-				":id"=>$this->idEmpreendedor,
-			));
-			return true;
+			$atualizar=$conexao->prepare($ini); 
+			$atualizar->execute();
 		}catch(PDOException $e){
 			echo $e->getMessage();
-			return false;
-		} 
+		}
 	}
 	public function verificarRequisicoes() : void {
 		if(sizeof($this->requisicoes_investimento)!=0){
@@ -215,7 +205,7 @@ class Empreendedor extends Usuario{
 		} catch(PDOException $e){
 			echo $e->getMessage();
 		}
-	}	
+	}
 }
  
 //$em=new Empreendedor('adasd@adsdas','fkonline','coxinha06','perto de ti','12312','sinal de fumaça','automotivo',1);

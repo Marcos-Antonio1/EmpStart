@@ -50,7 +50,7 @@ if($_POST['radio']=="E"){
                 var_dump($investidor);
                 session_start();
                 $_SESSION['usuario']= serialize($usuario);
-                header("Location: ../Views/home.php");
+                header("Location: ../Views/homeInvestidor.php");
             }else{
                 $mensagem="usuario não cadastrado";
                 header("Location: ../index.php?mensagem=$mensagem");

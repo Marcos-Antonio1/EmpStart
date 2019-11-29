@@ -8,8 +8,9 @@ use Classes\Usuario;
 use Classes\Bd;
 use PDO;
 use PDOException;
+use JsonSerializable;
 
-class Investidor extends Usuario {
+class Investidor extends Usuario implements JsonSerializable {
 	private $idInvestidor;
 	private $disponibilidade; // Isso seria para a parte de receber ou não indicações.
 	private $orcamentoInvestido;
@@ -22,15 +23,19 @@ class Investidor extends Usuario {
 		$this->disponibilidade = $disponibilidade;		
 		$this->orcamentoInvestido = $orcamentoInvestido;
 		$this->parcerias = array();
+		//$this->imagem=$imagem;
 		$this->pedidosDeParcerias = array();
 		$this->prejetosInvestidos=array();
-		parent::__construct($nome,$email, $login,$senha,$localizacao,$telefone, $outrosMeiosDecontato,$areaInteresse,$imagem="");
+		parent::__construct($nome,$email, $login,$senha,$localizacao,$telefone, $outrosMeiosDecontato,$areaInteresse,$imagem);
 }
+	public function __get($nome){
+		return $this->$nome;
+	}
 	public function cadastrar(){
 		$pdo=new Bd();
 		$conexao=$pdo->abrirConexao();
 		try{
-			$cadastrar=$conexao->prepare("insert into investidor (nome, email,login, senha, localizacao, telefone, outrosmeiosdecontato, areaatuacao, disponibilidade, orcamentoinvestido) values (:nome, :email, :login, :senha, :localizacao, :telefone, :outrosmeiosdecontato, :areaatuacao, :disponibilidade, :orcamentoinvestido)
+			$cadastrar=$conexao->prepare("insert into investidor (nome, email,login, senha, localizacao, telefone, outrosmeiosdecontato, areaatuacao, disponibilidade, orcamentoinvestido,imagem) values (:nome, :email, :login, :senha, :localizacao, :telefone, :outrosmeiosdecontato, :areaatuacao, :disponibilidade, :orcamentoinvestido,:imagem)
 			");
 			$cadastrar->execute(array(
 				":nome" =>$this->nome,
@@ -43,6 +48,7 @@ class Investidor extends Usuario {
 				":areaatuacao"=> $this->areaInteresse,
 				":disponibilidade"=>$this->disponibilidade,
 				":orcamentoinvestido" =>$this->orcamentoInvestido,
+				":imagem"=>$this->imagem,
 			));
 			
 		}catch(PDOException $e){
@@ -64,40 +70,27 @@ class Investidor extends Usuario {
 				 $buscarProjeto->execute(array(
 					 ":id"=>$idProjeto[0],
 				 ));
-				 $resulProjeto=$buscarProjeto->fetch(PDO::FETCH_OBJ);
-				 $projeto=new Projeto($resulProjeto->nome,$resulProjeto->descricao,$resulProjeto->disponibilidade_para_investimentos,$resulProjeto->orcamento,$resulProjeto->avaliacao,$resulProjeto-areaatuacao,$resulProjeto->fk_empreendedor_projeto,$resulProjeto->idprojeto,$resulProjeto->imagem); 
+				 $projeto=$buscarProjeto->fetch(PDO::FETCH_OBJ);
+				 $proje= new Projeto($projeto->nome,$projeto->descricao,$projeto->disponibilidade_para_investimentos,$projeto->areaatuacao,$projeto->imagem,$projeto->fk_empreendedor_projeto,$projeto->idprojeto,$projeto->orcamento,$projeto->avaliacao);
 				 $this->projetosInvestidos[]=$projeto;
 				}
-			 var_dump($this->projetosInvestidos);
+			 
 		}catch(PDOException $e){
 			echo $e->getMessage();
 		}
 	}
 
-	public function atualizarDados($dados=array(),$valores=array()) : bool {
-		$preparadorqueryAtributoseValores=array();
-		$interador=0;
-		while($interador<sizeof($dados)){
-			if(!is_numeric($valores[$interador])){
-				$preparadorqueryAtributoseValores[]=$dados[$interador]."="."'{$valores[$interador]}'";
-			}else{
-				$preparadorqueryAtributoseValores[]=$dados[$interador]."=".$valores[$interador];
-			}
-			$interador++;
-		}
-		$string=implode(",",$preparadorqueryAtributoseValores);
+	public function atualizarDados( $dados,$valores) { 
 		$pdo=new Bd();
 		$conexao=$pdo->abrirConexao();
+		$query1=["update investidor set ","$dados"," = ","$valores","where idinvestidor = ","$this->idInvestidor"];
+		$ini=implode("",$query1); 
 		try{
-			$update=$conexao->prepare("Update investidor set {$string} where idinvestidor=:id");
-			$update->execute(array(
-				":id"=>$this->idInvestidor,
-			));
-			return true;
+			$atualizar=$conexao->prepare($ini); 
+			$atualizar->execute();
 		}catch(PDOException $e){
 			echo $e->getMessage();
-			return false;
-		} 
+		}
 	}
 	public function investirEmProjeto(int $idProjeto, $valor) : bool {
 		$pdo=new Bd();
@@ -179,6 +172,16 @@ class Investidor extends Usuario {
 			echo $e->getMessage();
 		}
 	}
+	public function jsonSerialize() {
+        return [
+			'idInvestidor'=>$this->idInvestidor,
+			'orcamentoInvestido'=>$this->orcamentoInvestido,
+			'parcerias'=> $this->parcerias,
+			'pedidosDepacerias'=>$this->pedidosDeParcerias,
+			'projetosInvestidos'=>$this->projetosInvestidos
+		];
+	}
+	
 }
 
 /* 
