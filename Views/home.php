@@ -25,10 +25,10 @@ require_once "../Controladores/autorizacao.php";
     <!-- Sidebar -->
     <div class="bg-light border-right " id="sidebar-wrapper">
       <div class="sidebar-heading text-center"> 
-        <div class="text-center" id='imagem-perfil' "><img src="<?= $user->__get('imagem')?>" alt="..." class="img-thumbnail  rounded-circle img-propocional"></div><?= $user->__get('nome')?></div> 
+        <div class="text-center" id='imagem-perfil' "><img src="<?= $user->__get('imagem')?>" alt="..." class="img-thumbnail  rounded-circle img-propocional"></div><p class="nomeuser"><?= $user->__get('nome')?></p></div> 
       <div class="list-group list-group-flush">
         <a href="#" class=" inicio list-group-item list-group-item-action bg-light"><i class="fas fa-desktop"></i> Inicio </a>
-        <a href="cadastroProjeto.php" class="list-group-item list-group-item-action bg-light"><i class="fas fa-plus"></i> Cadastrar projeto</a>
+        <a href="#" class=" cadastro-projeto list-group-item list-group-item-action bg-light"><i class="fas fa-plus"></i> Cadastrar projeto</a>
         <a href="#" class=" mys-projects list-group-item list-group-item-action bg-light"><i class="fas fa-project-diagram"></i> Meus projeto</a>
         <a href="#" class=" mydados list-group-item list-group-item-action bg-light"><i class="fas fa-user-edit"></i> Meus Dados</a>
         <a href="#" class=" listar-top-ten list-group-item list-group-item-action bg-light "><i class="fas fa-cubes"></i> Top 10 projetos</a>
@@ -36,6 +36,7 @@ require_once "../Controladores/autorizacao.php";
       </div>
     </div>
     <!-- /#sidebar-wrapper -->
+    
 
     <!-- Page Content -->
     <div id="page-content-wrapper">
@@ -94,6 +95,8 @@ require_once "../Controladores/autorizacao.php";
     });
   </script>
   <script src="assets/js/home.js"></script>
+  <script src="assets/js/manipulacaodeprojetos.js"></script>
+ 
  
 
 </body>

@@ -138,6 +138,7 @@ $(function () {
     })
 
   })
+  
   $('.mydados').click(function () {
     $('.formulario').hide();
     $('.cards-projetos').empty();
@@ -150,12 +151,12 @@ $(function () {
         $('.cards-projetos').append(`
               <div class="container mt-3 ">
                     <div class=" add-form row">
-                      <div class="col-6">
-                        <h1 class="h4">Nome:</h1> <p>${dadosPerfil.nome} <i class=" nome fas fa-pencil-alt ml-5"></i></p>
-                        <h1 class="h4">Email:</h1> <p>${dadosPerfil.email} <i class="email fas fa-pencil-alt ml-5"></i></p>
-                        <h1 class="h4">Localização:</h1> <p>${dadosPerfil.local} <i class=" localizacao fas fa-pencil-alt ml-5"></i></p>
-                        <h1 class="h4">Telefone:</h1> <p>${dadosPerfil.telefone} <i class=" telefone fas fa-pencil-alt ml-5"></i></p>
-                        <h1 class="h4">OutrosMeios de contato:</h1> <p>${dadosPerfil.outrosmeios} <i class=" outros fas fa-pencil-alt ml-5"></i></p>
+                      <div class="col-6"> 
+                        <h1 class="h4">Nome:</h1> <p class="newnome">${dadosPerfil.nome} <i class=" nome fas fa-pencil-alt ml-5"></i></p>
+                        <h1 class="h4">Email:</h1> <p class ="newemail">${dadosPerfil.email} <i class="email fas fa-pencil-alt ml-5"></i></p>
+                        <h1 class="h4">Localização:</h1> <p class="newlocalizacao">${dadosPerfil.local} <i class=" localizacao fas fa-pencil-alt ml-5"></i></p>
+                        <h1 class="h4">Telefone:</h1> <p class="newtelefone">${dadosPerfil.telefone} <i class=" telefone fas fa-pencil-alt ml-5"></i></p>
+                        <h1 class="h4">OutrosMeios de contato:</h1> <p class="newoutros">${dadosPerfil.outrosmeios} <i class=" outros fas fa-pencil-alt ml-5"></i></p>
                     </div>   
               `)
         $('.nome').click(function () {
@@ -177,6 +178,10 @@ $(function () {
               data: { nome: nome.value },
               success: function () {
                 alert('Atualização feita')
+                $('.nomeuser').empty();
+                $('.nomeuser').append(`${nome.value}`) 
+                $('.newnome').empty()
+                $('.newnome').append(`${nome.value } <p class="text-muted"> Campo atualizado</p>`)
               },
               error: function () {
 
@@ -192,19 +197,19 @@ $(function () {
                     <label for="exampleInputEmail1">Endereço de email</label>
                     <input type="email" class="form-control" id="email" name='email' aria-describedby="emailHelp" required="required" >
                     <button type="button" class=" enviar btn btn-primary mt-2">Atualizar</button>
-                    <button type="button" class=" na btn btn-primary mt-2">Atualizar</button>
                     <button type="button" class="cancelar btn btn-danger mt-2"> Cancelar</button>
                   </div>
                 </form>
                 </div>`)
           $('.enviar').click(function () {
-            alert(email.value)
             $.ajax({
               method: "POST",
               url: "../Controladores/atualizarDadosUsuarios.php",
               data: { email: email.value },
               success: function () {
                 alert('Atualização feita')
+                $('.newemail').empty()
+                $('.newemail').append(`${email.value} <p class="text-muted"> Campo atualizado</p>`)
               },
               error: function () {
 
@@ -232,6 +237,8 @@ $(function () {
               data: { localizacao: localizacao.value },
               success: function () {
                 alert('Atualização feita')
+                $('.newlocalizacao').empty()
+                $('.newlocalizacao').append(`${localizacao.value} <p class="text-muted"> Campo atualizado</p>`)
               },
               error: function () {
 
@@ -258,9 +265,10 @@ $(function () {
               data: { telefone: telefone.value },
               success: function () {
                 alert('Atualização feita')
+                $('.newtelefone').empty()
+                $('.newtelefone').append(`${telefone.value} <p class="text-muted"> Campo atualizado</p>`)
               },
               error: function () {
-
               }
             })
             $(this).parents('.mostrado').hide();
@@ -284,6 +292,8 @@ $(function () {
               data: { outrosmeiosdecontato: outrosmeiosdecontato.value },
               success: function () {
                 alert('Atualização feita')
+                $('.newoutros').empty()
+                $('.newoutros').append(`${outrosmeiosdecontato.value} <p class="text-muted"> Campo atualizado</p>`)
               },
               error: function () {
 

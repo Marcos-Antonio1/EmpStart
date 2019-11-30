@@ -25,7 +25,7 @@ $user=unserialize($_SESSION['usuario']);
     <!-- Sidebar -->
     <div class="bg-light border-right " id="sidebar-wrapper">
       <div class="sidebar-heading text-center"> 
-        <div class="text-center" id='imagem-perfil' "><img src="<?= $user->__get('imagem')?>" alt="..." class="img-thumbnail  rounded-circle img-propocional"></div><?= $user->__get('nome') ?></div> 
+      <div class="text-center" id='imagem-perfil' "><img src="<?= $user->__get('imagem')?>" alt="..." class="img-thumbnail  rounded-circle img-propocional"></div><p class="nomeuser"><?= $user->__get('nome')?></p></div> 
       <div class="list-group list-group-flush">
         <a href="#" class=" inicio list-group-item list-group-item-action bg-light"><i class="fas fa-desktop"></i> Inicio </a>
         <a href="cadastroProjeto.php" class="list-group-item list-group-item-action bg-light"><i class="fas fa-user-friends"></i> Parcerias</a>
