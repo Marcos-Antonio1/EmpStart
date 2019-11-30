@@ -171,6 +171,9 @@ $(function () {
                     </div>
                 </form>
                 </div>`)
+          $('.cancelar').click(function () {
+              $(this).parents('.mostrado').hide();
+                })
           $('.enviar').click(function () {
             $.ajax({
               method: "POST",
@@ -197,6 +200,9 @@ $(function () {
                   </div>
                 </form>
                 </div>`)
+          $('.cancelar').click(function () {
+            $(this).parents('.mostrado').hide();
+              })
           $('.enviar').click(function () {
             $.ajax({
               method: "POST",
@@ -223,6 +229,9 @@ $(function () {
                     </div>
                 </form>
                 </div>`)
+          $('.cancelar').click(function () {
+            $(this).parents('.mostrado').hide();
+              })
           $('.enviar').click(function () {
             $(this).parents('.mostrado').hide();
             $.ajax({
@@ -250,6 +259,9 @@ $(function () {
                     </div>
                 </form>
                 </div>`)
+          $('.cancelar').click(function () {
+            $(this).parents('.mostrado').hide();
+              })
           $('.enviar').click(function () {
             $.ajax({
               method: "POST",
@@ -271,11 +283,14 @@ $(function () {
                   <div class="form-group">
                     <label for="exampleInputEmail1">Outros meios de contato</label>
                     <input type="text" class="form-control" id="outrosmeiosdecontato" name='outrosmeiosdecontato' aria-describedby="emailHelp" required="required">
-                    <button type="button" class=" enviar btn btn-primary mt-2">Atualizar</button>
+                    <button type="button" class="enviar btn btn-primary mt-2">Atualizar</button>
                     <button type="button" class="cancelar btn btn-danger mt-2"> Cancelar</button>
                     </div>
                 </form>
                 </div>`)
+          $('.cancelar').click(function () {
+            $(this).parents('.mostrado').hide();
+              })
           $('.enviar').click(function () {
             $.ajax({
               method: "POST",
