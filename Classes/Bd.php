@@ -12,7 +12,7 @@ class Bd{
     {
         $this->confLocal="pgsql:host=localhost; dbname=ProjetoPOO;";
         $this->user="postgres";
-        $this->pass="root";
+        $this->pass="123";
     }
     public function abrirConexao(){
         try{

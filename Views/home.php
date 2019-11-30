@@ -23,16 +23,16 @@ require_once "../Controladores/autorizacao.php";
 <body>
   <div class="d-flex" id="wrapper">
     <!-- Sidebar -->
-    <div class="bg-light border-right " id="sidebar-wrapper">
+    <div class="bg-dark border-right text-light" id="sidebar-wrapper">
       <div class="sidebar-heading text-center"> 
         <div class="text-center" id='imagem-perfil' "><img src="<?= $user->__get('imagem')?>" alt="..." class="img-thumbnail  rounded-circle img-propocional"></div><?= $user->__get('nome')?></div> 
       <div class="list-group list-group-flush">
-        <a href="#" class=" inicio list-group-item list-group-item-action bg-light"><i class="fas fa-desktop"></i> Inicio </a>
-        <a href="cadastroProjeto.php" class="list-group-item list-group-item-action bg-light"><i class="fas fa-plus"></i> Cadastrar projeto</a>
-        <a href="#" class=" mys-projects list-group-item list-group-item-action bg-light"><i class="fas fa-project-diagram"></i> Meus projeto</a>
-        <a href="#" class=" mydados list-group-item list-group-item-action bg-light"><i class="fas fa-user-edit"></i> Meus Dados</a>
-        <a href="#" class=" listar-top-ten list-group-item list-group-item-action bg-light "><i class="fas fa-cubes"></i> Top 10 projetos</a>
-        <a href="../Controladores/sair.php" class="list-group-item list-group-item-action bg-light"><i class="fas fa-sign-out-alt"></i>Sair</a>
+        <a href="#" class=" inicio list-group-item list-group-item-action bg-dark text-light"><i class="fas fa-desktop"></i> Inicio </a>
+        <a href="cadastroProjeto.php" class="list-group-item list-group-item-action bg-dark text text-light"><i class="fas fa-plus"></i> Cadastrar Projeto</a>
+        <a href="#" class=" mys-projects list-group-item list-group-item-action bg-dark text-light"><i class="fas fa-project-diagram"></i> Meus projetos</a>
+        <a href="#" class=" mydados list-group-item list-group-item-action bg-dark text-light"><i class="fas fa-user-edit"></i> Meus Dados</a>
+        <a href="#" class=" listar-top-ten list-group-item list-group-item-action bg-dark text-light"><i class="fas fa-cubes"></i> Top 10 projetos</a>
+        <a href="../Controladores/sair.php" class="list-group-item list-group-item-action bg-dark text-light"><i class="fas fa-sign-out-alt"></i>Sair</a>
       </div>
     </div>
     <!-- /#sidebar-wrapper -->
@@ -40,8 +40,8 @@ require_once "../Controladores/autorizacao.php";
     <!-- Page Content -->
     <div id="page-content-wrapper">
       
-      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom " id='pd-cor'>
-        <button class="btn btn-primary" id="menu-toggle"><i class="fas fa-bars"></i></button>
+      <nav class="navbar navbar-expand-lg navbar-light bg-dark border-bottom " id='pd-cor'>
+        <button class="btn btn-info" id="menu-toggle"><i class="fas fa-bars"></i></button>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -50,7 +50,7 @@ require_once "../Controladores/autorizacao.php";
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle bg-info text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Pedidos de investimento
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -66,7 +66,7 @@ require_once "../Controladores/autorizacao.php";
       <div class="container-fluid ml-5 mt-3">  
       <form class=" formulario form-inline my-2 my-lg-0 text-center">
             <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar </button>       
+            <button class="btn btn-info my-2 my-sm-0" type="submit">Pesquisar </button>       
       </form>
       
         <div class="container">

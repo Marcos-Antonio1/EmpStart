@@ -165,11 +165,14 @@ $(function () {
                   <div class="form-group">
                     <label for="exampleInputEmail1">Nome</label>
                     <input type="text" class="form-control" id="nome" name='nome' aria-describedby="emailHelp" placeholder="Seu nome" required="required">
-                    <button type="button" class=" enviar btn btn-primary mt-2">Atualizar</button>
+                    <button type="button" class="enviar btn btn-primary mt-2">Atualizar</button>
                     <button type="button" class="cancelar btn btn-danger mt-2"> Cancelar</button>
                     </div>
                 </form>
                 </div>`)
+          $('.cancelar').click(function () {
+                  $(this).parents('.mostrado').hide();
+                })
           $('.enviar').click(function () {
             $.ajax({
               method: "POST",
@@ -192,11 +195,13 @@ $(function () {
                     <label for="exampleInputEmail1">Endereço de email</label>
                     <input type="email" class="form-control" id="email" name='email' aria-describedby="emailHelp" required="required" >
                     <button type="button" class=" enviar btn btn-primary mt-2">Atualizar</button>
-                    <button type="button" class=" na btn btn-primary mt-2">Atualizar</button>
                     <button type="button" class="cancelar btn btn-danger mt-2"> Cancelar</button>
                   </div>
                 </form>
                 </div>`)
+          $('.cancelar').click(function () {
+            $(this).parents('.mostrado').hide();
+              })
           $('.enviar').click(function () {
             alert(email.value)
             $.ajax({
@@ -224,6 +229,9 @@ $(function () {
                     </div>
                 </form>
                 </div>`)
+          $('.cancelar').click(function () {
+            $(this).parents('.mostrado').hide();
+                })
           $('.enviar').click(function () {
             $(this).parents('.mostrado').hide();
             $.ajax({
@@ -251,6 +259,9 @@ $(function () {
                     </div>
                 </form>
                 </div>`)
+          $('.cancelar').click(function () {
+            $(this).parents('.mostrado').hide();
+                })
           $('.enviar').click(function () {
             $.ajax({
               method: "POST",
@@ -277,6 +288,9 @@ $(function () {
                     </div>
                 </form>
                 </div>`)
+          $('.cancelar').click(function () {
+              $(this).parents('.mostrado').hide();
+                })
           $('.enviar').click(function () {
             $.ajax({
               method: "POST",
