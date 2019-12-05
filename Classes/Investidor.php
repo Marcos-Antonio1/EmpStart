@@ -128,7 +128,7 @@ class Investidor extends Usuario implements JsonSerializable {
 		$pdo=new Bd();
 		$conexao=$pdo->abrirConexao();
 		try{
-		$confirmar=$conexao->prepare("update investidor_has_investidor set estadoparceria= true where investidor_idinvestidor1= :id and  investidor_idinvestidor2= :idParceiro");
+		$confirmar=$conexao->prepare("update investidor_has_investidor set estadoparceria= true where investidor_idinvestidor1= :idParceiro  and  investidor_idinvestidor2= :id");
 		$confirmar->execute(array(
 			":id"=>$this->idInvestidor,
 			":idParceiro"=>$idPaceirodaSolicitacao,
@@ -177,7 +177,7 @@ class Investidor extends Usuario implements JsonSerializable {
 		$pdo=new Bd();
 		$conexao=$pdo->abrirConexao();
 		try{
-			$buscar=$conexao->prepare("select DISTINCT investidor_idinvestidor1,investidor_idinvestidor2  from investidor_has_investidor where  investidor_idinvestidor1 = :id  and estadoparceria= :condicao or investidor_idinvestidor2= :id  and estadoparceria= :condicao ");
+			$buscar=$conexao->prepare("select  investidor_idinvestidor1,investidor_idinvestidor2  from investidor_has_investidor where  investidor_idinvestidor1 = :id  and estadoparceria= :condicao or investidor_idinvestidor2= :id  and estadoparceria= :condicao ");
 			$buscar->execute(array(
 				":id"=>$this->idInvestidor,
 				":condicao"=>true,
