@@ -8,7 +8,7 @@ spl_autoload_register(function($classname){
 use Classes\Bd;
 use Classes\Empreendedor;
 use Classes\Investidor;
-$urlparamostrarimagem="/var/www/html/ProjetoPOO/Views/assets/imgUser/magempadrao.jpeg";
+$urlparamostrarimagem="/var/www/html/ProjetoPOO/Views/assets/imgUser/imagempadrao.jpeg";
 $novoEndereco;
 if(!empty($_FILES)){
     $formatos=["png","jpeg","jpg"];

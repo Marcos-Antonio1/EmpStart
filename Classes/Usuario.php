@@ -54,7 +54,7 @@ abstract class Usuario {
 	public function buscarPorProjeto($palavra){
 		$pdo=new Bd();
 		$conexao=$pdo->abrirConexao();
-		$query1=["select * from projeto where nome like ", "'%$palavra%'"];
+		$query1=["select * from projeto where nome like ", "'$palavra%'"];
 		$ini=implode("",$query1);
 		$projetosbuscar=array(); 
 		try{
@@ -76,7 +76,7 @@ abstract class Usuario {
 	public function buscarEmpreendedor($palavra){
 		$pdo=new Bd();
 		$conexao=$pdo->abrirConexao();
-		$query1=["select * from empreendedor where nome like ", "'%$palavra%'"];
+		$query1=["select * from empreendedor where nome like ", "'$palavra%'"];
 		$ini=implode("",$query1);
 		$projetosbuscar=array(); 
 		$empreedores=array();
@@ -98,7 +98,7 @@ abstract class Usuario {
 	public function buscarInvestidor($palavra){
 		$pdo=new Bd();
 		$conexao=$pdo->abrirConexao();
-		$query1=["select * from investidor where nome like ", "'%$palavra%'"];
+		$query1=["select * from investidor where nome like ", "'$palavra%'"];
 		$ini=implode("",$query1); 
 		$investidores=array();
 		try{

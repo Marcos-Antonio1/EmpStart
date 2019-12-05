@@ -317,4 +317,54 @@ $(function(){
             }
         }) 
     });
+    $('.pedidos').click(function(){
+        $.ajax({
+            method:"POST",
+            url:"../Controladores/verpedidosdeInvestimento.php",
+            dataType:"json",
+            success:function(pedidosdados){
+                $('.cards-projetos').empty();
+                $('.buscar').hide()
+                for( let pedido in pedidosdados){
+                alert("deu certo");
+                $('.cards-projetos').append(`<div class=" tirar container mt-5">
+                    <div class="pedidos row">
+                        <div class="col-4"><img  class=" pequena img-projeto-dados rounded"src="${pedidosdados[pedido].imagem}" alt="..." class="img-thumbnail"></div>
+                        <div class="col-4 inline">
+                        <p>Nome do Investidor: ${pedidosdados[pedido].nomeinvestidor} </p>
+                        <p>Telefone:${pedidosdados[pedido].telefoneInvestidor} </p>
+                        <p>Valor do investimento: <p class="valor"> ${pedidosdados[pedido].quantidadeinvestida}</p> </p>
+                        <p>Projeto alvo : ${pedidosdados[pedido].nomeprojeto}</p>
+                        </div>
+                        <div class ="col-2"><button type="button" class=" inserir botao btn btn-success">Aceitar</button> </div>
+                        <input class="idin" type="hidden" name="idinvestidor" value="${pedidosdados[pedido].investidor_idinvestidor}">
+                        <input class="idin" type="hidden" name="idprojeto" value="${pedidosdados[pedido].projeto_idprojeto}">
+                    </div>
+                    </div>`)
+                    $('.inserir').click(function(){
+                      let idinvestidor=$(this).parents('.tirar').find("input[name=idinvestidor]").val();
+                        idinvestidor=parseInt(idinvestidor)
+                      let idprojeto=$(this).parents('.tirar').find("input[name=idprojeto]").val();
+                        idprojeto=parseInt(idprojeto)
+                        dadocontexto=$(this)
+                        $.ajax({
+                            method:"POST",
+                            url:"../Controladores/adicionarInvestidor.php",
+                            data:{idi:idinvestidor,idp:idprojeto},
+                            success:function(){
+                                $(dadocontexto).parents('.tirar').fadeOut(1000);
+                            },
+                            error:function(){
+                                alert('Ocorreu um erro interno por favor recarregue a página')
+                            }
+
+                        })
+                    })
+                }
+            },
+            error:function(){
+                alert("deu errado");
+            }
+        })
+    })
 })

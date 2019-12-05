@@ -103,45 +103,41 @@ class Empreendedor extends Usuario implements JsonSerializable{
 			echo $e->getMessage();
 		}
 	}
-	public function verificarRequisicoes() : void {
-		if(sizeof($this->requisicoes_investimento)!=0){
-			unset($this->requisicoes_investimento);
-			$this->requisicoes_investimento=array();
-		}
-		$pdo=new Bd();
-		$conexao=$pdo->abrirConexao();
-		try{
-			$buscarProjetos=$conexao->prepare("SELECT idprojeto from projeto where fk_empreendedor_projeto=:id");
-			$buscarProjetos->execute(array(
-				":id"=>$this->idEmpreendedor,
-			));
-			$resultados=$buscarProjetos->fetchAll(PDO::FETCH_NUM);
-			foreach($resultados as $resultado){
-				$requisicoes=$conexao->prepare("SELECT investidor_idinvestidor,projeto_idprojeto FROM projeto_has_investidor where projeto_idprojeto= :idprojeto and investimentoativo= :condicao");
-				$requisicoes->execute(array(
-					"idprojeto"=>$resultado[0],
-					":condicao"=>'false',
+		 public function verificarRequisicoes() : void {
+			$pdo=new Bd();
+			$conexao=$pdo->abrirConexao();
+			try{
+				$busca=$conexao->prepare("Select * from projeto where  fk_empreendedor_projeto=:id");
+				$busca->execute(array(
+					":id"=>$this->idEmpreendedor,
 				));
-				$resultados1=$requisicoes->fetchAll(PDO::FETCH_NUM);
-				foreach($resultados1 as $resultado1){
-					if(sizeof($resultado1)!=0){
-						$this->requisicoes_investimento[]=$resultado1;
+				$resultado=$busca->fetchAll(PDO::FETCH_OBJ);
+				$investimentos=array();
+				foreach($resultado as $resul){
+					$requi=$conexao->prepare("select * from projeto_has_investidor where projeto_idprojeto= :id and investimentoativo= false");
+					$requi->execute(array(
+						":id"=>$resul->idprojeto,
+					));
+					$projetovindo=$requi->fetchAll(PDO::FETCH_OBJ);
+						$investimento[]=$projetovindo;
+					}
+					foreach($investimento as $inves){
+						foreach($inves as $in){
+							if(!count(get_object_vars($in)) == 0){
+								$this->requisicoes_investimento[]=$in;
 					}
 				}
-				
+				} 	
+			}catch(PDOException $e){
+				echo $e->getMessage();
 			}
-			var_dump($this->requisicoes_investimento);
-		}catch(PDOException $e){
-			echo $e->getMessage();
-		}
-	}
+		} 
 	public function adicionarInvestidor($idProjeto,$idInvestidor) : bool {
 		$pdo=new Bd();
 		$conexao=$pdo->abrirConexao();
 		try{
-			$add=$conexao->prepare("UPDATE projeto_has_investidor set investimentoativo= :condicao where projeto_idprojeto=:idprojeto and investidor_idinvestidor=:idinvestidor");
+			$add=$conexao->prepare("UPDATE projeto_has_investidor set investimentoativo= true where projeto_idprojeto=:idprojeto and investidor_idinvestidor=:idinvestidor");
 			$add->execute(array(
-				":condicao"=>'true',
 				":idprojeto"=>$idProjeto,
 				"idinvestidor"=>$idInvestidor
 			));
@@ -250,7 +246,8 @@ class Empreendedor extends Usuario implements JsonSerializable{
 	}
 }
  
-//$em=new Empreendedor('adasd@adsdas','fkonline','coxinha06','perto de ti','12312','sinal de fumaça','automotivo',1);
+//$em=new Empreendedor('adasd@adsdas','fkonline','coxinha06','perto de ti','12312','sinal de fumaça','automotivo',4);
+//$em= new Empreendedor('adsdsa','adsda','adsda','dasda','dsasda','212321','ddasd','asdas',1);
  //$em->cadastrar();
  //$projeto= new Projeto(1,'outrocoisa','caça e pesca',true,0,10,'informatica',1);
 //$em->criarProjeto($projeto);
@@ -263,6 +260,7 @@ class Empreendedor extends Usuario implements JsonSerializable{
 //$em->excluirInvestidor(3,2);
 //$em->listarProjetos();
 //$em->verificarRequisicoes();
+//var_dump($em->__get('requisicoes_investimento'));
 //$em->adicionarInvestidor(2,2);
 //$em->verificarRequisicoes(); 
 //$em->avaliarProjetos(4,10);

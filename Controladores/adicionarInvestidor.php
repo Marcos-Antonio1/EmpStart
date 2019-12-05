@@ -10,6 +10,5 @@ session_start();
 
 if(isset($_POST)){
     $user=unserialize( $_SESSION['usuario']);
-    $resultado =$user->mostrarDados();
-    echo json_encode($resultado);
+    $user->adicionarInvestidor($_POST['idp'],$_POST['idi']);
 }
