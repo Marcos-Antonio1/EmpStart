@@ -47,6 +47,7 @@ $user=unserialize($_SESSION['usuario']);
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
+        <img  class='pequena-black'src="assets/imagens/Empstart_Logo3_versaoblack.png" alt="...">
       </nav>
       <div class=" container-fluid ml-5 mt-3">  
       <form class=" formulario form-inline my-2 my-lg-0 text-center">
