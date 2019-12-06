@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="Views/assets/bootstrap-4.3.1-dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="Views/assets/css/site.css">
-  <title>home</title>
+  <title>EmpStart - Home</title>
 </head>
 
 <body>
@@ -15,7 +15,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
       <a class="navbar-brand" href="#">
-        <img class="pequena img-fluid" src="Views/assets/imagens/Empstart_Logo3.png" alt=""> 
+        <img class="pequena img-fluid" src="Views/assets/imagens/Empstart_Logo3_2.png" alt="logo.png"> 
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -27,7 +27,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="Views/cadastro.php">junte-se a nós</a>
+            <a class="nav-link" href="Views/cadastro.php">Junte-se a nós</a>
           </li>
         </ul>
       </div>
@@ -70,7 +70,7 @@
                   <label class="custom-control-label" for="customRadioInline2">Investidor</label>
                 </div>
                 <div>
-                  <button class="btn btn-block btn-info ripple-effect" type="submit" name="Submit" alt="sign in">Entrar</button>
+                  <button class="btn btn-block btn-info ripple-effect mt-3" type="submit" name="Submit" alt="sign in">Entrar</button>
                 </div>
             </div>
             </form>
@@ -96,9 +96,6 @@
             <h2 class="card-title">Comece agora!</h2>
             <p class="card-text">Crie o perfil da sua startup, ganhe visibilidade na comunidade e nas redes sociais, vire notícia e dê o seu start na nova economia.</p>
           </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-info btn-sm">More Info</a>
-          </div>
         </div>
       </div>
       <!-- /.col-md-4 -->
@@ -108,9 +105,6 @@
             <h2 class="card-title">Procure Oportunidades</h2>
             <p class="card-text">Confira os projetos disponíveis e descubra oportunidades de investimento em startups na sua área de interesse e mais.</p>
           </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-info btn-sm">More Info</a>
-          </div>
         </div>
       </div>
       <!-- /.col-md-4 -->
@@ -119,9 +113,6 @@
           <div class="card-body">
             <h2 class="card-title">Nossa Comunidade</h2>
             <p class="card-text">Procure e conheça pessoas com ideias semelhantes às suas e contribua para gerar novas parcerias e disseminar conhecimento na nossa comunidade.</p>
-          </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-info btn-sm">More</a>
           </div>
         </div>
       </div>
@@ -136,7 +127,7 @@
   <!-- Footer -->
   <footer class="py-5 bg-dark">
     <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+      <p class="m-0 text-center text-white">Copyright &copy; Empstart 2019</p>
     </div>
     <!-- /.container -->
   </footer>

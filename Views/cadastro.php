@@ -31,18 +31,23 @@
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="cidade">Cidade</label>
-        <input type="text" class="form-control" id="cidade" name="cidade" required="required">
+        <input type="text" class="form-control" id="cidade" placeholder="Informe sua cidade. Ex: Rio De Janeio" name="cidade" required="required">
       </div>
       <div class="form-group col-md-4">
         <label for="areainteresse">Area de Interesse</label>
         <select id="areainteresse" name="areainteresse" class="form-control" required="required">
           <option selected>Area de Interesse</option>
-          <option>...</option>
+            <option>Saúde</option>
+            <option>Educação</option>
+            <option>TI</option>
+            <option>Mercado Imobiliário</option>
+            <option>Mobilidade urbana</option>
+            <option>Saúde</option>
         </select>
       </div>
     </div>
-    <div class="form-group">
-      <label for="exampleFormControlFile1">insira uma imagem de perfil </label>
+    <div class="form-group mt-3">
+      <label for="exampleFormControlFile1">Insira uma imagem de perfil </label>
       <input type="file" class="form-control-file" id='imgprojeto' name='imagem'>
     </div>
     <div class="form-check-inline">
