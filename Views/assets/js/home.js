@@ -210,130 +210,130 @@ $(function () {
                       }
                   })
               })
-              $('.estrela_um').click(function () {
-                  $(this).addClass('selecionada')
-                  let id=$(this).parents('.projetos').find("input[name=id]").val()
-                  let contexto1=$(this)
-                  $.ajax({
-                      method:"POST",
-                      url:"../Controladores/AvaliarProjeto.php",
-                      data:{projetoid:id, valor:1},
-                      success:function(){
-                          let teste=$(contexto1).parents('.projetos-card').find('.score').html()
-                          let numero=teste.slice(8);
-                          numero=parseInt(numero)
-                          numero=numero+1;
-                          $(contexto1).parents('.projetos-card').find('.score').empty()
-                          $(contexto1).parents('.projetos-card').find('.score').append(`Score : ${numero}`)
-                          $(contexto1).parents('.projetos').find('.estrelas').fadeOut(1000);
-                      },
-                      error:function(){
-                          alert('Não foi possivel enviar a avaliação, por favor recarregue o site ');
-                      }
-                  })
-              })
-                $('.estrela_dois').click(function () {
-                  $(this).parents('.estrelas').find('.estrela_um').addClass('selecionada')
-                  $(this).addClass('selecionada')
-                   alert('aki')
-                  let id=$(this).parents('.projetos').find("input[name=id]").val()
-                  let contexto2=$(this)
-                  $.ajax({
-                      method:"POST",
-                      url:"../Controladores/AvaliarProjeto.php",
-                      data:{projetoid:id, valor:2},
-                      success:function(){
-                          $(contexto2).parents('.projetos').find('.estrelas').fadeOut(1000);
-                          let teste=$(contexto2).parents('.projetos-card').find('.score').html()
-                          let numero=teste.slice(8);
-                          numero=parseInt(numero)
-                          numero=numero+2;
-                          $(contexto2).parents('.projetos-card').find('.score').empty()
-                          $(contexto2).parents('.projetos-card').find('.score').append(`Score : ${numero}`)
-                      },
-                      error:function(){
-                          alert('Não foi possivel enviar a avaliação, por favor recarregue o site ');
-                      }
-                  })
-                })
-                $('.estrela_tres').click(function () {
-                  $(this).parents('.estrelas').find('.estrela_um').addClass('selecionada')
-                  $(this).parents('.estrelas').find('.estrela_dois').addClass('selecionada')
-                  $(this).addClass('selecionada')
-                  let contexto3=$(this)
-                  let id=$(this).parents('.projetos').find("input[name=id]").val()
-                  $.ajax({
-                      method:"POST",
-                      url:"../Controladores/AvaliarProjeto.php",
-                      data:{projetoid:id, valor:3},
-                      success:function(){
-                          $(contexto3).parents('.projetos').find('.estrelas').fadeOut(1000);
-                          let teste=$(contexto3).parents('.projetos-card').find('.score').html()
-                          let numero=teste.slice(8);
-                          numero=parseInt(numero)
-                          numero=numero+3;
-                          $(contexto3).parents('.projetos-card').find('.score').empty()
-                          $(contexto3).parents('.projetos-card').find('.score').append(`Score : ${numero}`)
-                      },
-                      error:function(){
-                          alert('Não foi possivel enviar a avaliação, por favor recarregue o site ');
-                      }
-                  })
-                })
-        
-                $('.estrela_quatro').click(function () {
-                  $(this).parents('.estrelas').find('.estrela_um').addClass('selecionada')
-                  $(this).parents('.estrelas').find('.estrela_dois').addClass('selecionada')
-                  $(this).parents('.estrelas').find('.estrela_tres').addClass('selecionada')
-                  $(this).addClass('selecionada')
-                  let id=$(this).parents('.projetos').find("input[name=id]").val()
-                  let contexto4=$(this)
-                  $.ajax({
-                      method:"POST",
-                      url:"../Controladores/AvaliarProjeto.php",
-                      data:{projetoid:id, valor:4},
-                      success:function(){
-                          $(contexto4).parents('.projetos').find('.estrelas').fadeOut(1000);
-                          let teste=$(contexto4).parents('.projetos-card').find('.score').html()
-                          let numero=teste.slice(8);
-                          numero=parseInt(numero)
-                          numero=numero+4;
-                          $(contexto4).parents('.projetos-card').find('.score').empty()
-                          $(contexto4).parents('.projetos-card').find('.score').append(`Score : ${numero}`)
-                      },
-                      error:function(){
-                          alert('Não foi possivel enviar a avaliação, por favor recarregue o site ');
-                      }
-                  })
-                })
-        
-                $('.estrela_cinco').click(function () {
-                  $(this).parents('.estrelas').find('.estrela_um').addClass('selecionada')
-                  $(this).parents('.estrelas').find('.estrela_dois').addClass('selecionada')
-                  $(this).parents('.estrelas').find('.estrela_tres').addClass('selecionada')
-                  $(this).parents('.estrelas').find('.estrela_quatro').addClass('selecionada')
-                  $(this).addClass('selecionada')
-                  let id=$(this).parents('.projetos').find("input[name=id]").val()
-                  let contexto5=$(this)
-                  $.ajax({
-                      method:"POST",
-                      url:"../Controladores/AvaliarProjeto.php",
-                      data:{projetoid:id, valor:5},
-                      success:function(){
-                          $(contexto5).parents('.projetos').find('.estrelas').fadeOut(1000); 
-                          let teste=$(contexto5).parents('.projetos-card').find('.score').html()
-                          let numero=teste.slice(8);
-                          numero=parseInt(numero)
-                          numero=numero+5;
-                          $(contexto5).parents('.projetos-card').find('.score').empty()
-                          $(contexto5).parents('.projetos-card').find('.score').append(`Score : ${numero}`)
-                      },
-                      error:function(){
-                          alert('Não foi possivel enviar a avaliação, por favor recarregue o site ');
-                      }
-                  })
-                })
           }
+          $('.estrela_um').click(function () {
+            $(this).addClass('selecionada')
+            let id=$(this).parents('.projetos').find("input[name=id]").val()
+            let contexto1=$(this)
+            $.ajax({
+                method:"POST",
+                url:"../Controladores/AvaliarProjeto.php",
+                data:{projetoid:id, valor:1},
+                success:function(){
+                    let teste=$(contexto1).parents('.projetos-card').find('.score').html()
+                    let numero=teste.slice(8);
+                    numero=parseInt(numero)
+                    numero=numero+1;
+                    $(contexto1).parents('.projetos-card').find('.score').empty()
+                    $(contexto1).parents('.projetos-card').find('.score').append(`Score : ${numero}`)
+                    $(contexto1).parents('.projetos').find('.estrelas').fadeOut(1000);
+                },
+                error:function(){
+                    alert('Não foi possivel enviar a avaliação, por favor recarregue o site ');
+                }
+            })
+        })
+          $('.estrela_dois').click(function () {
+            $(this).parents('.estrelas').find('.estrela_um').addClass('selecionada')
+            $(this).addClass('selecionada')
+             alert('aki')
+            let id=$(this).parents('.projetos').find("input[name=id]").val()
+            let contexto2=$(this)
+            $.ajax({
+                method:"POST",
+                url:"../Controladores/AvaliarProjeto.php",
+                data:{projetoid:id, valor:2},
+                success:function(){
+                    $(contexto2).parents('.projetos').find('.estrelas').fadeOut(1000);
+                    let teste=$(contexto2).parents('.projetos-card').find('.score').html()
+                    let numero=teste.slice(8);
+                    numero=parseInt(numero)
+                    numero=numero+2;
+                    $(contexto2).parents('.projetos-card').find('.score').empty()
+                    $(contexto2).parents('.projetos-card').find('.score').append(`Score : ${numero}`)
+                },
+                error:function(){
+                    alert('Não foi possivel enviar a avaliação, por favor recarregue o site ');
+                }
+            })
+          })
+          $('.estrela_tres').click(function () {
+            $(this).parents('.estrelas').find('.estrela_um').addClass('selecionada')
+            $(this).parents('.estrelas').find('.estrela_dois').addClass('selecionada')
+            $(this).addClass('selecionada')
+            let contexto3=$(this)
+            let id=$(this).parents('.projetos').find("input[name=id]").val()
+            $.ajax({
+                method:"POST",
+                url:"../Controladores/AvaliarProjeto.php",
+                data:{projetoid:id, valor:3},
+                success:function(){
+                    $(contexto3).parents('.projetos').find('.estrelas').fadeOut(1000);
+                    let teste=$(contexto3).parents('.projetos-card').find('.score').html()
+                    let numero=teste.slice(8);
+                    numero=parseInt(numero)
+                    numero=numero+3;
+                    $(contexto3).parents('.projetos-card').find('.score').empty()
+                    $(contexto3).parents('.projetos-card').find('.score').append(`Score : ${numero}`)
+                },
+                error:function(){
+                    alert('Não foi possivel enviar a avaliação, por favor recarregue o site ');
+                }
+            })
+          })
+  
+          $('.estrela_quatro').click(function () {
+            $(this).parents('.estrelas').find('.estrela_um').addClass('selecionada')
+            $(this).parents('.estrelas').find('.estrela_dois').addClass('selecionada')
+            $(this).parents('.estrelas').find('.estrela_tres').addClass('selecionada')
+            $(this).addClass('selecionada')
+            let id=$(this).parents('.projetos').find("input[name=id]").val()
+            let contexto4=$(this)
+            $.ajax({
+                method:"POST",
+                url:"../Controladores/AvaliarProjeto.php",
+                data:{projetoid:id, valor:4},
+                success:function(){
+                    $(contexto4).parents('.projetos').find('.estrelas').fadeOut(1000);
+                    let teste=$(contexto4).parents('.projetos-card').find('.score').html()
+                    let numero=teste.slice(8);
+                    numero=parseInt(numero)
+                    numero=numero+4;
+                    $(contexto4).parents('.projetos-card').find('.score').empty()
+                    $(contexto4).parents('.projetos-card').find('.score').append(`Score : ${numero}`)
+                },
+                error:function(){
+                    alert('Não foi possivel enviar a avaliação, por favor recarregue o site ');
+                }
+            })
+          })
+  
+          $('.estrela_cinco').click(function () {
+            $(this).parents('.estrelas').find('.estrela_um').addClass('selecionada')
+            $(this).parents('.estrelas').find('.estrela_dois').addClass('selecionada')
+            $(this).parents('.estrelas').find('.estrela_tres').addClass('selecionada')
+            $(this).parents('.estrelas').find('.estrela_quatro').addClass('selecionada')
+            $(this).addClass('selecionada')
+            let id=$(this).parents('.projetos').find("input[name=id]").val()
+            let contexto5=$(this)
+            $.ajax({
+                method:"POST",
+                url:"../Controladores/AvaliarProjeto.php",
+                data:{projetoid:id, valor:5},
+                success:function(){
+                    $(contexto5).parents('.projetos').find('.estrelas').fadeOut(1000); 
+                    let teste=$(contexto5).parents('.projetos-card').find('.score').html()
+                    let numero=teste.slice(8);
+                    numero=parseInt(numero)
+                    numero=numero+5;
+                    $(contexto5).parents('.projetos-card').find('.score').empty()
+                    $(contexto5).parents('.projetos-card').find('.score').append(`Score : ${numero}`)
+                },
+                error:function(){
+                    alert('Não foi possivel enviar a avaliação, por favor recarregue o site ');
+                }
+            })
+          }) 
       },
       error:function(){
           alert("deu errado");
@@ -363,7 +363,7 @@ $(function () {
                       <h5 class="card-title">${dadosmyprojects[myprojets].nome}</h5>
                       <p class="card-text">${dadosmyprojects[myprojets].descricao}</p>
                       <p class="card-text"> Score: ${dadosmyprojects[myprojets].avaliacao}</p>
-                      <p class="card-text"><small class="text-muted">${dadosmyprojects[myprojets].areaatuacao}</small></p>                  
+                      <p class="card-text"><small class="text-muted">${dadosmyprojects[myprojets].areatuacao}</small></p>                  
                   </div>
                 </div>
                 <input class="idProject" type="hidden" name="id" value="${dadosmyprojects[myprojets].idprojeto}">

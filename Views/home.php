@@ -29,7 +29,7 @@ require_once "../Controladores/autorizacao.php";
       <div class="list-group list-group-flush" >
         <a href="#" class=" inicio list-group-item list-group-item-action "><i class="fas fa-desktop"></i> Inicio </a>
         <a href="#" class=" cadastro-projeto list-group-item list-group-item-action "><i class="fas fa-plus"></i> Cadastrar projeto</a>
-        <a href="#" class=" mys-projects list-group-item list-group-item-action "><i class="fas fa-project-diagram"></i> Meus projeto</a>
+        <a href="#" class=" mys-projects list-group-item list-group-item-action "><i class="fas fa-project-diagram"></i> Meus projetos</a>
         <a href="#" class=" mydados list-group-item list-group-item-action "><i class="fas fa-user-edit"></i> Meus Dados</a>
         <a href="#" class=" pedidos list-group-item list-group-item-action "><i class="fas fa-hand-holding-usd"></i> Ver pedidos de investimento</a>
         <a href="#" class=" listar-top-ten list-group-item list-group-item-action  "><i class="fas fa-cubes"></i> Top 10 projetos</a>

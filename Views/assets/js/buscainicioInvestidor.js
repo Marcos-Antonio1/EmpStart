@@ -153,6 +153,8 @@ $(function(){
                         })
                        
                     })
+                    
+                    }
                     $('.estrela_um').click(function () {
                         $(this).addClass('selecionada')
                         let id=$(this).parents('.projetos').find("input[name=id]").val()
@@ -276,7 +278,6 @@ $(function(){
                             }
                         })
                       })
-                    }
             },
             error:function(){
                 alert("algo deu errado por favor recarregue a página")
