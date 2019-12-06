@@ -363,7 +363,7 @@ $(function () {
                       <h5 class="card-title">${dadosmyprojects[myprojets].nome}</h5>
                       <p class="card-text">${dadosmyprojects[myprojets].descricao}</p>
                       <p class="card-text"> Score: ${dadosmyprojects[myprojets].avaliacao}</p>
-                      <p class="card-text"><small class="text-muted">${dadosmyprojects[myprojets].areaatuacao}</small></p>                  
+                      <p class="card-text"><small class="text-muted">${dadosmyprojects[myprojets].areatuacao}</small></p>                  
                   </div>
                 </div>
                 <input class="idProject" type="hidden" name="id" value="${dadosmyprojects[myprojets].idprojeto}">
