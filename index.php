@@ -27,12 +27,6 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Usuarios</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="">Projetos</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="Views/cadastro.php">junte-se a nós</a>
           </li>
         </ul>

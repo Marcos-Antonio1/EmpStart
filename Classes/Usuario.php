@@ -39,8 +39,7 @@ abstract class Usuario {
 			$listar=$conexao->prepare("Select  empreendedor.nome as empreendedor,projeto.nome, projeto.orcamento, projeto.avaliacao from empreendedor, projeto where projeto.fk_empreendedor_projeto=empreendedor.idempreendedor ORDER BY avaliacao DESC limit 10");
 			$listar->execute(array(
 			));
-		  return $projetos=$listar->fetchAll(PDO::FETCH_OBJ);
-		  echo "marocs";	
+		  return $projetos=$listar->fetchAll(PDO::FETCH_OBJ);	
 		}catch(PDOException $e){
 			echo $e->getMessage();
 		}
@@ -54,7 +53,7 @@ abstract class Usuario {
 	public function buscarPorProjeto($palavra){
 		$pdo=new Bd();
 		$conexao=$pdo->abrirConexao();
-		$query1=["select * from projeto where nome like ", "'$palavra%'"];
+		$query1=["select * from projeto where nome like ", "'$palavra%'","or areaatuacao like ","'$palavra%'"];
 		$ini=implode("",$query1);
 		$projetosbuscar=array(); 
 		try{
@@ -177,6 +176,51 @@ abstract class Usuario {
 			echo $e->getMessage();
 		}
 		
+	}
+	public function BuscarTodososUsuario(){
+		$todosusuarios=array();
+		$todosempreendedores=array();
+		$todososinvestidores=array();
+		$pdo=new Bd();
+		$conexao=$pdo->abrirConexao();
+		try{
+			$buscar=$conexao->prepare("select * from empreendedor");
+			$buscar->execute();
+			$empreendor=$buscar->fetchAll(PDO::FETCH_OBJ);
+			foreach($empreendor as $empreen){
+				$todosempreendedores[]=$empreen;		
+			}
+			$buscari=$conexao->prepare("select * from investidor");
+			$buscari->execute();
+			$investidores=$buscari->fetchAll(PDO::FETCH_OBJ);
+			foreach($investidores as $investidor){
+				$in=new Investidor($investidor->nome,$investidor->email,$investidor->login,$investidor->senha,$investidor->localizacao,$investidor->telefone,$investidor->outrosmeiosdecontato,$investidor->areaatuacao,$investidor->disponibilidade,$investidor->orcamentoinvestido,$investidor->imagem,$investidor->idinvestidor);
+				$todososinvestidores[]=$in;
+			}
+			$todosusuarios=array_merge($todosempreendedores,$todososinvestidores);
+			return $todosusuarios;
+		}catch(PDOException $e){
+			echo $e->getMessage();
+		}
+	}
+	public function buscarTodososProjetos(){
+		$todososProjetos=array();
+		$pdo=new Bd();
+		$conexao=$pdo->abrirConexao();
+		try{
+			$buscar=$conexao->prepare("select * from projeto");
+			$buscar->execute();
+			$projetos=$buscar->fetchAll(PDO::FETCH_OBJ);
+			foreach($projetos as $projeto){
+				//String $nome, String $descricao, bool $disponibilidade_para_investimentos,string $areaAtuacao,$imagem="",$fk_empreendedor_projeto='',$idprojeto='',float $orcamento=0,$avaliacao=''
+				$proje= new Projeto($projeto->nome,$projeto->descricao,$projeto->disponibilidade_para_investimentos,$projeto->areaatuacao,$projeto->imagem,$projeto->fk_empreendedor_projeto,$projeto->idprojeto,$projeto->orcamento,$projeto->avaliacao);
+				$todososProjetos[]=$proje;
+			}
+			return $todososProjetos;
+		}catch(PDOException $e){
+			echo $e->getMessage();		
+		}
+
 	}
 }
 

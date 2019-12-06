@@ -1,12 +1,11 @@
 $(function(){
-    $('.buscar').keyup(function () { 
-        let valor= $(this).val();
+    $('.pro').click(function(){
+        alert('funcionando')
         $.ajax({
             method: "POST",
-            url:"../Controladores/buscar.php",
-            dataType:"json",
-            data:{palavra:valor},
-            success:function(dados){
+            url: "../Controladores/buscarTodososProjetos.php",
+            dataType: "json",
+            success: function (dados) {
                 $('.cards-projetos').empty();
                 for(let minhabusca in dados){
                     minhabusca=parseInt(minhabusca)
@@ -34,27 +33,52 @@ $(function(){
                             <button type="button" class="ver-detalhes-lista-de-projetos btn btn-primary btn-sm mr-3">Ver detalhes do projeto <i class="fas fa-eye"></i></button>
                           </div>
                     </div>`)
+                    }
                     $('.ver-detalhes-lista-de-projetos').click(function(){
                         $('.cards-projetos').empty();
+                        let idprojetojainvestido
+                        $.ajax({
+                            method:"POST",
+                            url:"../Controladores/listarIdsdeProjetosInvestidos.php",
+                            dataType:"json",
+                            success:function(projetosinvestidos){
+                                idprojetojainvestido=projetosinvestidos;
+                            },
+                            
+                        })
                         id=$(this).parents('.projetos').find("input[name=id]").val();
+                        id=parseInt(id)
                         $.ajax({
                             method: "POST",
                             url: "../Controladores/buscarProjetoParadetalhar.php",
                             dataType: "json",
                             data: { idprojeto: id },
                             success: function (buscaprojetounico) {
-                            let disponivel;
                             let classe;
+                            let disponivel;
+                            let btativo;
+                            let textativo;
+                               
                             if(buscaprojetounico.disponibilidade==false){
                                 disponivel="Não";
                                 classe="disponibilidade btn btn-danger btn-sm"
+                                btativo="d-none"
                             }else{
                                 disponivel="Sim";
                                 classe="disponibilidade btn btn-success btn-sm"
+                                btativo=""
                             }
+                           if(Array.isArray(idprojetojainvestido)){
+                                if(idprojetojainvestido.includes(id)){
+                                    textativo=""
+                                    btativo="d-none"
+                                }else{
+                                    textativo="d-none"
+                                }
+                           }
                             $('.formulario').hide()
                             $('.cards-projetos').empty();
-                            $('.cards-projetos').append(`<div class=" projeto-dados container mt-3 ">
+                            $('.cards-projetos').append(`<div class=" projeto-dados container mt-5 ">
                             <div class=" formulario-dados-projeto add-form row">
                             <input class="idProject" type="hidden" name="id" value="${buscaprojetounico.idprojeto}">
                             <header class="col-4">
@@ -74,19 +98,60 @@ $(function(){
                                     </li>
                                 </ul>
                                 </header>  
-                                <div class="col-4">
+                                <div class="iniciar-investimento-ativo col-4">
                                 <h1 class="h4">Nome:</h1> <p class="newnomeprojeto">${buscaprojetounico.nome} </p>
                                 <h1 class="h4">Área de atuação:</h1> <p class ="newarea">${buscaprojetounico.areatuacao} </p>
-                                <h1 class="h4">Descrição:</h1> <p class="newdescricao">${buscaprojetounico.descricao} </p>                  
-                            </div>
+                                <h1 class="h4">Descrição:</h1> <p class="newdescricao">${buscaprojetounico.descricao} </p>                
+                                <button type="button" class=" iniciar-investimento ${btativo} btn btn-primary">Iniciar Investimento</button>
+                                <p class="muted ${textativo}"> Voce já é investidor desse projeto</p>
+                                </div>
                             <div class="campos-atualizar col-4"> </div>
                             
                             </div>  `)
-                            },
+                            $('.iniciar-investimento ').click(function(){
+                                $('.campos-atualizar').append(`<form class="sumir">
+                                <div class=" formulario-invetimento form-group">
+                                  <label for="exampleInputEmail1">Valor Investimento</label>
+                                  <input type="number" class="form-control" id="valor" name="investimento"  placeholder="informe o valor do investimento">                        
+                                    <button class=" enviar-oferta btn btn-primary">Enviar Oferta</button>
+                                    <button  class=" cancelar btn btn-danger">Cancelar</button>
+                                </div>
+                                </form>`)
+                                let formcontexto;
+                              $('.cancelar').click(function(e){
+                                  e.preventDefault();
+                                $(this).parents('.sumir').hide()
+                               formcontexto=$(this);
+                            })
+                            $('.enviar-oferta').click(function(e){
+                                e.preventDefault();
+                                let valor=$(this).parents('form').find("input[name=investimento]").val()
+                                $.ajax({
+                                    method:"POST",
+                                    url:"../Controladores/investirEmProjeto.php",
+                                    data:{idProjeto:id,valor:valor},
+                                    success:function(){
+                                        $('.sumir').hide()
+                                        $('.iniciar-investimento').hide()
+                                        alert("oferta enviada")
+                                        
+                                    },
+                                    error:function(){
+                                        alert("Erro interno por favor recarregue o nosso site")
+                                    }
+                                })
+                                
+                            })
+
+                            })
+                              
+                        },
                             error:function(){
                                 alert ("deu errado aki")
                             }
+                            
                         })
+                       
                     })
                     $('.estrela_um').click(function () {
                         $(this).addClass('selecionada')
@@ -212,7 +277,22 @@ $(function(){
                         })
                       })
                     }
-                    else if(dados[minhabusca].hasOwnProperty("idInvestidor")){
+            },
+            error:function(){
+                alert("algo deu errado por favor recarregue a página")
+            }
+        });
+    })
+    $('.pessoas').click(function(){
+        $.ajax({
+            method: "POST",
+            url: "../Controladores/listartodososusuarios.php",
+            dataType: "json",
+            success: function (dados) {
+                $('.cards-projetos').empty();
+                for(let minhabusca in dados){
+                    minhabusca=parseInt(minhabusca)
+                     if(dados[minhabusca].hasOwnProperty("idInvestidor")){
                         $('.cards-projetos').append(`<div class="investidor col-xs-12 co l-sm-6 col-md-4 mt-4" >
                         <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
                             <div>
@@ -232,12 +312,30 @@ $(function(){
                     </div>`)
                      $('.detalhar').click(function(){
                         let id=$(this).parents('.frontside').find("input[name=id]").val()
+                        id=parseInt(id)
+                        let idsinvestidores;
+                        $.ajax({
+                            method:"POST",
+                            url:"../Controladores/listarIdsDosinvestidoresparceiros.php",
+                            dataType:"json",
+                            success:function(idsinvestidoresparceiros){
+                                idsinvestidores=idsinvestidoresparceiros
+                            }
+                        })
+                        let classe;
+                        let texto;
                         $.ajax({
                             method:"POST",
                             url:"../Controladores/detalharInvestidor.php",
                             dataType: "json",
                             data:{idInvestidor:id},
                             success: function(dados){
+                                    if(idsinvestidores.includes(id)){
+                                        classe="d-none"
+                                        texto=`Voces já possuem vinculo de parceria`
+                                    }else{
+                                        texto=''
+                                    }
                                     $('.formulario').hide();
                                     $('.cards-projetos').empty()
                                     $('.cards-projetos').append(`
@@ -251,8 +349,25 @@ $(function(){
                                         <h1 class="h4">Email:</h1> <p class ="newemail">${dados.email} </p>
                                         <h1 class="h4">Localização:</h1> <p class="newlocalizacao">${dados.localizacao} </i></p>
                                         <h1 class="h4">Telefone:</h1> <p class="newtelefone">${dados.telefone} </p>
+                                        <button type="button" class=" ${classe} solicitar btn btn-success">Enviar solicitação de parceria</button>
+                                        <p class="muted"> ${texto} </p>
                                     </div>    
                                           `)
+                                $('.solicitar').click(function(){
+                                    alert('tão me apertando')
+                                    $.ajax({
+                                        method:"POST",
+                                        url:"../Controladores/solicitarParceria.php",
+                                        data:{idinvestidor:id},
+                                        success:function(){
+                                            alert('solicitação enviada com sucesso')
+                                            $('.solicitar').hide();
+                                        },
+                                        error:function(){
+                                            alert('solicitação não enviada')
+                                        }
+                                    })
+                                })
                             },
                             error:function(){
                                 alert('não foi')
@@ -269,7 +384,7 @@ $(function(){
                                             <p> Empreendor </p>
                                             <p><img class="img-propocional rounded-circle  img-fluid" src="${dados[minhabusca].imagem}" alt="card image"></p>
                                             <h4 class="card-title">${dados[minhabusca].nome}</h4>
-                                            <input class="idin" type="hidden" name="id" value="${dados[minhabusca].idEmpreendedor}">
+                                            <input class="idin" type="hidden" name="id" value="${dados[minhabusca].idempreendedor}">
                                             <a href="#" class=" detalhar-empreendedor btn btn-primary btn-sm"><i class="fas fa-eye"></i> ver detalhes</a>
                                         </div>
                                     </div>
@@ -309,62 +424,10 @@ $(function(){
                         })
                     }) 
                 }
-    
             },
             error:function(){
-                $('.cards-projetos').empty();
-                $('.cards-projetos').append(`<p class="h4" mt-6> Nenhum resultado encontrado </p>`);
+                alert("houve algum erro recarregue a página")
             }
-        }) 
-    });
-    $('.pedidos').click(function(){
-        $.ajax({
-            method:"POST",
-            url:"../Controladores/verpedidosdeInvestimento.php",
-            dataType:"json",
-            success:function(pedidosdados){
-                $('.cards-projetos').empty();
-                $('.formulario').hide()
-                for( let pedido in pedidosdados){
-                alert("deu certo");
-                $('.cards-projetos').append(`<div class=" tirar container mt-5">
-                    <div class="pedidos row">
-                        <div class="col-4"><img  class=" pequena img-projeto-dados rounded"src="${pedidosdados[pedido].imagem}" alt="..." class="img-thumbnail"></div>
-                        <div class="col-4 inline">
-                        <p>Nome do Investidor: ${pedidosdados[pedido].nomeinvestidor} </p>
-                        <p>Telefone:${pedidosdados[pedido].telefoneInvestidor} </p>
-                        <p>Valor do investimento: <p class="valor"> ${pedidosdados[pedido].quantidadeinvestida}</p> </p>
-                        <p>Projeto alvo : ${pedidosdados[pedido].nomeprojeto}</p>
-                        </div>
-                        <div class ="col-2"><button type="button" class=" inserir botao btn btn-success">Aceitar</button> </div>
-                        <input class="idin" type="hidden" name="idinvestidor" value="${pedidosdados[pedido].investidor_idinvestidor}">
-                        <input class="idin" type="hidden" name="idprojeto" value="${pedidosdados[pedido].projeto_idprojeto}">
-                    </div>
-                    </div>`)
-                    $('.inserir').click(function(){
-                      let idinvestidor=$(this).parents('.tirar').find("input[name=idinvestidor]").val();
-                        idinvestidor=parseInt(idinvestidor)
-                      let idprojeto=$(this).parents('.tirar').find("input[name=idprojeto]").val();
-                        idprojeto=parseInt(idprojeto)
-                        dadocontexto=$(this)
-                        $.ajax({
-                            method:"POST",
-                            url:"../Controladores/adicionarInvestidor.php",
-                            data:{idi:idinvestidor,idp:idprojeto},
-                            success:function(){
-                                $(dadocontexto).parents('.tirar').fadeOut(1000);
-                            },
-                            error:function(){
-                                alert('Ocorreu um erro interno por favor recarregue a página')
-                            }
-
-                        })
-                    })
-                }
-            },
-            error:function(){
-                alert("deu errado");
-            }
-        })
+        });
     })
 })

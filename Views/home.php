@@ -50,22 +50,28 @@ require_once "../Controladores/autorizacao.php";
       </a>
       </a>
         </button>
-        <img  class='pequena-black'src="assets/imagens/Empstart_Logo3_versaoblack.png" alt="...">
+        <img  class='pequena-black'src="assets/imagens/Empstart_Logo3_versaoblack2.png" alt="...">
       </nav> 
       <div class="container-fluid ml-5 mt-3">  
       <form class=" formulario form-inline my-2 my-lg-0 text-center">
       <form class=" formulario form-inline my-2 my-lg-0 text-center">
-            <input class=" buscar col-6 form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar" ><i class="fas fa-search"></i>        
+            <input class=" buscar col-8 form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar" ><i class="fas fa-search"></i>        
       </form>
       
       </form>
       
         <div class="container">
             <div class="cards-projetos row flex-wrap">
-                <!-- Button trigger modal -->
-
-<!-- Modal -->
-
+              <div class="container contact-form">
+                <div class="contact-image">
+                    <img src="assets/imagens/rocket_contact.png" alt="rocket_contact"/>
+                </div>
+                <div class="inserirtexto">
+                   <p class="aliamento"> Empstart sua plataforma de investimentos e inovação</p>
+                   <button type="button" class=" pro btn btn-primary btn-lg ">Projetos</button>
+                   <button type="button" class=" pessoas btn btn-primary btn-lg ml-2">Pessoas</button>
+                  </div>  
+              </div>
             </div>       
         </div>
     </div>
@@ -83,10 +89,12 @@ require_once "../Controladores/autorizacao.php";
       e.preventDefault();
       $("#wrapper").toggleClass("toggled");
     });
+  
   </script>
   <script src="assets/js/home.js"></script>
   <script src="assets/js/manipulacaodeprojetos.js"></script>
   <script src="assets/js/buscaParaEmpreendedor.js"></script>
+  <script src ="assets/js/buscainicioEmpreendedor.js"></script>
  
  
 

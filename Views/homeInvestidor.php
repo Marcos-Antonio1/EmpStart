@@ -49,14 +49,26 @@ $user=unserialize($_SESSION['usuario']);
         </button>
         <img  class='pequena-black'src="assets/imagens/Empstart_Logo3_versaoblack.png" alt="...">
       </nav>
-      <div class=" container-fluid ml-5 mt-3">  
+      <div class="container-fluid ml-5 mt-3">  
       <form class=" formulario form-inline my-2 my-lg-0 text-center">
-            <input class=" buscar col-4 form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
-            <button class=" col-2 btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>            
+      <form class=" formulario form-inline my-2 my-lg-0 text-center">
+            <input class=" buscar col-8 form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar" ><i class="fas fa-search"></i>        
       </form>
+      
+      </form>
+      
         <div class="container">
-            <div class=" cards-projetos row flex-wrap">    
-            
+            <div class="cards-projetos row flex-wrap">
+              <div class="container contact-form">
+                <div class="contact-image">
+                    <img src="assets/imagens/rocket_contact.png" alt="rocket_contact"/>
+                </div>
+                <div class="inserirtexto">
+                   <p class="aliamento"> Empstart sua plataforma de investimentos e inovação</p>
+                   <button type="button" class=" pro btn btn-primary btn-lg ">Projetos</button>
+                   <button type="button" class=" pessoas btn btn-primary btn-lg ml-2">Pessoas</button>
+                  </div>  
+              </div>
             </div>       
         </div>
     </div>
@@ -78,6 +90,7 @@ $user=unserialize($_SESSION['usuario']);
   </script>
   <script src="assets/js/homeInvestidor.js"></script>
   <script src="assets/js/buscasParaInvestidor.js"></script>
+  <script src="assets/js/buscainicioInvestidor.js"></script>
   
 
 </body>
