@@ -80,7 +80,7 @@ $(function () {
                                 <p> Empreendor </p>
                                 <p><img class="img-propocional rounded-circle  img-fluid" src="${dados[minhabusca].imagem}" alt="card image"></p>
                                 <h4 class="card-title">${dados[minhabusca].nome}</h4>
-                                <input class="idin" type="hidden" name="id" value="${dados[minhabusca].idEmpreendedor}">
+                                <input class="idin" type="hidden" name="id" value="${dados[minhabusca].idempreendedor}">
                                 <a href="#" class=" detalhar-empreendedor btn btn-primary btn-sm"><i class="fas fa-eye"></i> ver detalhes</a>
                             </div>
                         </div>
