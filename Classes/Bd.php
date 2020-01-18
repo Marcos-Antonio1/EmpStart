@@ -11,8 +11,8 @@ class Bd{
     public function __construct()
     {
         $this->confLocal="pgsql:host=localhost; dbname=ProjetoPOO;";
-        $this->user="postgres";
-        $this->pass="root";
+        $this->user="";
+        $this->pass="";
     }
     public function abrirConexao(){
         try{

@@ -1,6 +1,5 @@
 $(function(){
     $('.pro').click(function(){
-        alert('funcionando')
         $.ajax({
             method: "POST",
             url: "../Controladores/buscarTodososProjetos.php",
@@ -34,125 +33,125 @@ $(function(){
                           </div>
                     </div>`)
                     }
-                    $('.ver-detalhes-lista-de-projetos').click(function(){
-                        $('.cards-projetos').empty();
-                        let idprojetojainvestido
-                        $.ajax({
-                            method:"POST",
-                            url:"../Controladores/listarIdsdeProjetosInvestidos.php",
-                            dataType:"json",
-                            success:function(projetosinvestidos){
-                                idprojetojainvestido=projetosinvestidos;
-                            },
-                            
-                        })
-                        id=$(this).parents('.projetos').find("input[name=id]").val();
-                        id=parseInt(id)
-                        $.ajax({
-                            method: "POST",
-                            url: "../Controladores/buscarProjetoParadetalhar.php",
-                            dataType: "json",
-                            data: { idprojeto: id },
-                            success: function (buscaprojetounico) {
-                            let classe;
-                            let disponivel;
-                            let btativo;
-                            let textativo;
-                               
-                            if(buscaprojetounico.disponibilidade==false){
-                                disponivel="Não";
-                                classe="disponibilidade btn btn-danger btn-sm"
-                                btativo="d-none"
-                            }else{
-                                disponivel="Sim";
-                                classe="disponibilidade btn btn-success btn-sm"
-                                btativo=""
-                            }
-                           if(Array.isArray(idprojetojainvestido)){
-                                if(idprojetojainvestido.includes(id)){
-                                    textativo=""
-                                    btativo="d-none"
-                                }else{
-                                    textativo="d-none"
-                                }
-                           }
-                            $('.formulario').hide()
+                        $('.ver-detalhes-lista-de-projetos').click(function(){
                             $('.cards-projetos').empty();
-                            $('.cards-projetos').append(`<div class=" projeto-dados container mt-5 ">
-                            <div class=" formulario-dados-projeto add-form row">
-                            <input class="idProject" type="hidden" name="id" value="${buscaprojetounico.idprojeto}">
-                            <header class="col-4">
-                            <a href="#" class="alterar-imagem"> <img  class="img-projeto-dados rounded"src="${buscaprojetounico.imagem}" alt="..." class="img-thumbnail"></a>
-                                <ul class="list-group mt-4">
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    Avaliação 
-                                    <span class="badge badge-primary badge-pill">${buscaprojetounico.avaliacao}</span>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    Orçamento
-                                    <span class="badge badge-primary badge-pill">${buscaprojetounico.orcamento}</span>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    Disponibilidade Para Investimento
-                                    <div id="bddis"class="${classe}">${disponivel}</div>
-                                    </li>
-                                </ul>
-                                </header>  
-                                <div class="iniciar-investimento-ativo col-4">
-                                <h1 class="h4">Nome:</h1> <p class="newnomeprojeto">${buscaprojetounico.nome} </p>
-                                <h1 class="h4">Área de atuação:</h1> <p class ="newarea">${buscaprojetounico.areatuacao} </p>
-                                <h1 class="h4">Descrição:</h1> <p class="newdescricao">${buscaprojetounico.descricao} </p>                
-                                <button type="button" class=" iniciar-investimento ${btativo} btn btn-primary">Iniciar Investimento</button>
-                                <p class="muted ${textativo}"> Voce já é investidor desse projeto</p>
-                                </div>
-                            <div class="campos-atualizar col-4"> </div>
-                            
-                            </div>  `)
-                            $('.iniciar-investimento ').click(function(){
-                                $('.campos-atualizar').append(`<form class="sumir">
-                                <div class=" formulario-invetimento form-group">
-                                  <label for="exampleInputEmail1">Valor Investimento</label>
-                                  <input type="number" class="form-control" id="valor" name="investimento"  placeholder="informe o valor do investimento">                        
-                                    <button class=" enviar-oferta btn btn-primary">Enviar Oferta</button>
-                                    <button  class=" cancelar btn btn-danger">Cancelar</button>
-                                </div>
-                                </form>`)
-                                let formcontexto;
-                              $('.cancelar').click(function(e){
-                                  e.preventDefault();
-                                $(this).parents('.sumir').hide()
-                               formcontexto=$(this);
-                            })
-                            $('.enviar-oferta').click(function(e){
-                                e.preventDefault();
-                                let valor=$(this).parents('form').find("input[name=investimento]").val()
-                                $.ajax({
-                                    method:"POST",
-                                    url:"../Controladores/investirEmProjeto.php",
-                                    data:{idProjeto:id,valor:valor},
-                                    success:function(){
-                                        $('.sumir').hide()
-                                        $('.iniciar-investimento').hide()
-                                        alert("oferta enviada")
-                                        
-                                    },
-                                    error:function(){
-                                        alert("Erro interno por favor recarregue o nosso site")
-                                    }
-                                })
+                            let idprojetojainvestido
+                            $.ajax({
+                                method:"POST",
+                                url:"../Controladores/listarIdsdeProjetosInvestidos.php",
+                                dataType:"json",
+                                success:function(projetosinvestidos){
+                                    idprojetojainvestido=projetosinvestidos;
+                                },
                                 
                             })
-
-                            })
-                              
-                        },
-                            error:function(){
-                                alert ("deu errado aki")
+                            id=$(this).parents('.projetos').find("input[name=id]").val();
+                            id=parseInt(id)
+                            $.ajax({
+                                method: "POST",
+                                url: "../Controladores/buscarProjetoParadetalhar.php",
+                                dataType: "json",
+                                data: { idprojeto: id },
+                                success: function (buscaprojetounico) {
+                                let classe;
+                                let disponivel;
+                                let btativo;
+                                let textativo;
+                                
+                                if(buscaprojetounico.disponibilidade==false){
+                                    disponivel="Não";
+                                    classe="disponibilidade btn btn-danger btn-sm"
+                                    btativo="d-none"
+                                }else{
+                                    disponivel="Sim";
+                                    classe="disponibilidade btn btn-success btn-sm"
+                                    btativo=""
+                                }
+                            if(Array.isArray(idprojetojainvestido)){
+                                    if(idprojetojainvestido.includes(id)){
+                                        textativo=""
+                                        btativo="d-none"
+                                    }else{
+                                        textativo="d-none"
+                                    }
                             }
-                            
+                                $('.formulario').hide()
+                                $('.cards-projetos').empty();
+                                $('.cards-projetos').append(`<div class=" projeto-dados container mt-5 ">
+                                <div class=" formulario-dados-projeto add-form row">
+                                <input class="idProject" type="hidden" name="id" value="${buscaprojetounico.idprojeto}">
+                                <header class="col-4">
+                                <a href="#" class="alterar-imagem"> <img  class="img-projeto-dados rounded"src="${buscaprojetounico.imagem}" alt="..." class="img-thumbnail"></a>
+                                    <ul class="list-group mt-4">
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Avaliação 
+                                        <span class="badge badge-primary badge-pill">${buscaprojetounico.avaliacao}</span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Orçamento
+                                        <span class="badge badge-primary badge-pill">${buscaprojetounico.orcamento}</span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Disponibilidade Para Investimento
+                                        <div id="bddis"class="${classe}">${disponivel}</div>
+                                        </li>
+                                    </ul>
+                                    </header>  
+                                    <div class="iniciar-investimento-ativo col-4">
+                                    <h1 class="h4">Nome:</h1> <p class="newnomeprojeto">${buscaprojetounico.nome} </p>
+                                    <h1 class="h4">Área de atuação:</h1> <p class ="newarea">${buscaprojetounico.areatuacao} </p>
+                                    <h1 class="h4">Descrição:</h1> <p class="newdescricao">${buscaprojetounico.descricao} </p>                
+                                    <button type="button" class=" iniciar-investimento ${btativo} btn btn-primary">Iniciar Investimento</button>
+                                    <p class="muted ${textativo}"> Voce já é investidor desse projeto</p>
+                                    </div>
+                                <div class="campos-atualizar col-4"> </div>
+                                
+                                </div>  `)
+                                $('.iniciar-investimento ').click(function(){
+                                    $('.campos-atualizar').append(`<form class="sumir">
+                                    <div class=" formulario-invetimento form-group">
+                                    <label for="exampleInputEmail1">Valor Investimento</label>
+                                    <input type="number" class="form-control" id="valor" name="investimento"  placeholder="informe o valor do investimento">                        
+                                        <button class=" enviar-oferta btn btn-primary">Enviar Oferta</button>
+                                        <button  class=" cancelar btn btn-danger">Cancelar</button>
+                                    </div>
+                                    </form>`)
+                                    let formcontexto;
+                                $('.cancelar').click(function(e){
+                                    e.preventDefault();
+                                    $(this).parents('.sumir').hide()
+                                formcontexto=$(this);
+                                })
+                                $('.enviar-oferta').click(function(e){
+                                    e.preventDefault();
+                                    let valor=$(this).parents('form').find("input[name=investimento]").val()
+                                    $.ajax({
+                                        method:"POST",
+                                        url:"../Controladores/investirEmProjeto.php",
+                                        data:{idProjeto:id,valor:valor},
+                                        success:function(){
+                                            $('.sumir').hide()
+                                            $('.iniciar-investimento').hide()
+                                            alert("oferta enviada")
+                                            
+                                        },
+                                        error:function(){
+                                            alert("Erro interno por favor recarregue o nosso site")
+                                        }
+                                    })
+                                    
+                                })
+
+                                })
+                                
+                            },
+                                error:function(){
+                                    alert ("Ocorreu um erro. Recarregue a página.")
+                                }
+                                
+                            })
+                        
                         })
-                       
-                    })
                     
                     }
                     $('.estrela_um').click(function () {
@@ -180,7 +179,6 @@ $(function(){
                       $('.estrela_dois').click(function () {
                         $(this).parents('.estrelas').find('.estrela_um').addClass('selecionada')
                         $(this).addClass('selecionada')
-                         alert('aki')
                         let id=$(this).parents('.projetos').find("input[name=id]").val()
                         let contexto2=$(this)
                         $.ajax({
@@ -355,7 +353,6 @@ $(function(){
                                     </div>    
                                           `)
                                 $('.solicitar').click(function(){
-                                    alert('tão me apertando')
                                     $.ajax({
                                         method:"POST",
                                         url:"../Controladores/solicitarParceria.php",
@@ -371,7 +368,7 @@ $(function(){
                                 })
                             },
                             error:function(){
-                                alert('não foi')
+                                alert('Ocorreu um erro. Recarregue a página.')
                             }
                         })
                     }) 
@@ -420,7 +417,7 @@ $(function(){
                                           `)
                             },
                             error:function(){
-                                alert('não foi')
+                                alert('Ocorreu um erro. Recarregue a página.')
                             }
                         })
                     }) 

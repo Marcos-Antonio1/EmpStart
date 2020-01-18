@@ -179,12 +179,23 @@ class Empreendedor extends Usuario implements JsonSerializable{
 		}
 	}
 	public function excluirProjeto($idProjeto){
+		$idProjeto=intval($idProjeto);
 		$pdo=new Bd();
 		$conexao=$pdo->abrirConexao();
 		try{
-			$excluirDependenciaProjeto_investidor_has_projeto=$conexao->prepare("DELETE FROM projeto_has_investidor where projeto_idprojeto= :id;
+			$excluirDependenciaProjeto_investidor_has_projeto=$conexao->prepare("DELETE FROM projeto_has_investidor where projeto_idprojeto= :id
 			");
 			$excluirDependenciaProjeto_investidor_has_projeto->execute(array(
+				":id"=>$idProjeto,
+			));
+			$excluirdependencia1=$conexao->prepare("DELETE FROM avaliacao_investidor
+			WHERE projeto_idprojeto= :id ;");
+			$excluirdependencia1->execute(array(
+				":id"=>$idProjeto,
+			));
+			$excluirdependencia2=$conexao->prepare("DELETE FROM avaliacao_empreendedor
+			WHERE projeto_idprojeto= :id ;");
+			$excluirdependencia2->execute(array(
 				":id"=>$idProjeto,
 			));
 			$excluirProjeto=$conexao->prepare("DELETE FROM projeto where idprojeto=:id");

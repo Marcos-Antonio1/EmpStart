@@ -43,6 +43,7 @@
             <option>Mercado Imobiliário</option>
             <option>Mobilidade urbana</option>
             <option>Saúde</option>
+            <option>Outros</option>
         </select>
       </div>
     </div>
@@ -62,8 +63,13 @@
           Investidor
         </label>
     </div>
-    <br><br><button type="submit" name="Submit" class="btn btn-info">Cadastrar</button>
+    <br><br><button type="submit" name="Submit" class=" cadastro btn btn-info">Cadastrar</button>
   </form>
 </div>
+<script>
+    $('.cadastro').click(function(){
+      alert('Usuário cadastrado com sucesso')
+    })
+</script>
 </body>
 <?php include "template/footer.php"?>
