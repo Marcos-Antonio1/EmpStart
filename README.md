@@ -5,7 +5,7 @@ PHP, Javascript,jquery, ajax, postgree , html, css
 
 
 # Instalação
-colocar a pasta principal do projeto num servidor apache;
+Colocar a pasta principal do projeto num servidor apache;
 
 Executar o arquivo de sql(BancoDeDadosDumb.txt) no postgre;
 
