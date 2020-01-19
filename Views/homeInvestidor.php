@@ -91,7 +91,7 @@ $user=unserialize($_SESSION['usuario']);
   <script src="assets/js/homeInvestidor.js"></script>
   <script src="assets/js/buscasParaInvestidor.js"></script>
   <script src="assets/js/buscainicioInvestidor.js"></script>
-  <script src="assets/js/carregamentoEstrelas.js"></script>
+
   
 
 </body>

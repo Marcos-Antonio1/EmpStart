@@ -13,7 +13,6 @@ $(function () {
       </div>  
   </div>`);
   $('.pessoas').click(function(){
-    alert('estou sendo apertado')
     $.ajax({
         method:"POST",
         url:"../Controladores/listartodososusuarios.php",
@@ -66,7 +65,7 @@ $(function () {
                                   `)
                     },
                     error:function(){
-                        alert('não foi')
+                        alert('Ocorreu um erro. Recarregue a página.')
                     }
                 })
             })
@@ -115,7 +114,7 @@ $(function () {
                               `)
                 },
                 error:function(){
-                    alert('não foi')
+                    alert('Ocorreu um erro. Recarregue a página.')
                 }
             })
         }) 
@@ -206,7 +205,7 @@ $(function () {
                       </div>  `)
                       },
                       error:function(){
-                          alert ("deu errado aki")
+                          alert ("Ocorreu um erro. Recarregue a página.")
                       }
                   })
               })
@@ -236,7 +235,6 @@ $(function () {
           $('.estrela_dois').click(function () {
             $(this).parents('.estrelas').find('.estrela_um').addClass('selecionada')
             $(this).addClass('selecionada')
-             alert('aki')
             let id=$(this).parents('.projetos').find("input[name=id]").val()
             let contexto2=$(this)
             $.ajax({
@@ -350,34 +348,37 @@ $(function () {
       url: "../Controladores/listarMeusProjetos.php",
       dataType: "json",
       success: function (dadosmyprojects) {
-        alert("deu certo");
-        for (let myprojets in dadosmyprojects) {
-          myprojets = parseInt(myprojets)
-          $('.cards-projetos').append(`<div class="projetos </div> col-12 col-md-6 mt-md-5" style="max-width: 540px;">
-            <div class=" projetos row no-gutters">
-                <div class="col-md-4">
-                <img src="${dadosmyprojects[myprojets].imagem}" class="card-img" id='imagem-perfil' alt="">
-                </div>
-                <div class="projetos col-md-8">
-                  <div class="card-body">
-                      <h5 class="card-title">${dadosmyprojects[myprojets].nome}</h5>
-                      <p class="card-text">${dadosmyprojects[myprojets].descricao}</p>
-                      <p class="card-text"> Score: ${dadosmyprojects[myprojets].avaliacao}</p>
-                      <p class="card-text"><small class="text-muted">${dadosmyprojects[myprojets].areatuacao}</small></p>                  
+        if(dadosmyprojects.length >0){
+          for (let myprojets in dadosmyprojects) {
+            myprojets = parseInt(myprojets)
+            $('.cards-projetos').append(`<div class="projetos </div> col-12 col-md-6 mt-md-5" style="max-width: 540px;">
+              <div class=" projetos row no-gutters">
+                  <div class="col-md-4">
+                  <img src="${dadosmyprojects[myprojets].imagem}" class="card-img" id='imagem-perfil' alt="">
                   </div>
+                  <div class="projetos col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">${dadosmyprojects[myprojets].nome}</h5>
+                        <p class="card-text">${dadosmyprojects[myprojets].descricao}</p>
+                        <p class="card-text"> Score: ${dadosmyprojects[myprojets].avaliacao}</p>
+                        <p class="card-text"><small class="text-muted">${dadosmyprojects[myprojets].areatuacao}</small></p>                  
+                    </div>
+                  </div>
+                  <input class="idProject" type="hidden" name="id" value="${dadosmyprojects[myprojets].idprojeto}">
+                  <button type="button" class="ver-detalhes btn btn-primary btn-sm mr-3">Ver detalhes do projeto <i class="fas fa-eye"></i></button>
+                  <button type="button" class=" ver-investidores btn btn-primary btn-sm">Ver Investidores <i class="fas fa-eye"></i></button> 
+                  <button type="button" class=" apagar btn btn-danger btn-sm ml-3"> Apagar Projeto <i class="fas fa-trash-alt"></i></button>
                 </div>
-                <input class="idProject" type="hidden" name="id" value="${dadosmyprojects[myprojets].idprojeto}">
-                <button type="button" class="ver-detalhes btn btn-primary btn-sm mr-3">Ver detalhes do projeto <i class="fas fa-eye"></i></button>
-                <button type="button" class=" ver-investidores btn btn-primary btn-sm">Ver Investidores <i class="fas fa-eye"></i></button> 
-                <button type="button" class=" apagar btn btn-danger btn-sm ml-3"> Apagar Projeto <i class="fas fa-trash-alt"></i></button>
-              </div>
-        </div>`)
+          </div>`)
         }
+      }else{
+        $('.cards-projetos').append(`<div class= "container text-center h2 mt-5"> Nennhum projeto foi cadastrado ainda </div>`)
+
+      }
         $('.apagar').click(function () {
           let id = $(this).parents('.projetos').find("input[name=id]").val();
-          alert(id)
-          alert('Estão me apertando aki');
           bt = $(this)
+          alert(id);
           if (confirm('Tem certeza que deseja excluir esse projeto')) {
             $.ajax({
               method: "POST",
@@ -387,7 +388,7 @@ $(function () {
                 $(bt).parents('.projetos').fadeOut(1000)
               },
               Error: function () {
-                alert("houve um erro por favor recaregue a página")
+                alert("Ocorreu um erro. Recarregue a página.")
               }
 
             })
@@ -401,16 +402,15 @@ $(function () {
             dataType: "json",
             data: { idprojeto: id },
             success: function (buscaprojetounico) {
-              let disponivel;
-              let classe;
-              if(buscaprojetounico.disponibilidade==false){
-                disponivel="Não";
-                classe="disponibilidade btn btn-danger btn-sm"
-              }else{
-                disponivel="Sim";
-                classe="disponibilidade btn btn-success btn-sm"
-              }
-              alert("deu certo");
+                let disponivel;
+                let classe;
+                if(buscaprojetounico.disponibilidade==false){
+                  disponivel="Não";
+                  classe="disponibilidade btn btn-danger btn-sm"
+                }else{
+                  disponivel="Sim";
+                  classe="disponibilidade btn btn-success btn-sm"
+                }
               $('.cards-projetos').empty();
               $('.cards-projetos').append(`<div class=" projeto-dados container mt-3 ">
               <div class=" formulario-dados-projeto add-form row">
@@ -487,15 +487,13 @@ $(function () {
                   $(this).parents('.mostrado').hide();
                 })
                 $('.enviar-name').click(function () {
-                  alert('tão me apertando aki')
                   let idprojetoAtualizar= $(this).parents('.projeto-dados').find("input[name=id]").val()
-                   alert(idprojetoAtualizar)
                    $.ajax({
                     method: "POST",
                     url: "../Controladores/alterarDadosDoProjeto.php",
                     data: {idprojeto:idprojetoAtualizar,dado:"nome", valor: nomeprojeto.value },
                     success: function () {
-                      alert('Atualização feita')
+                      alert('Atualização concluída com sucesso.')
                       $('.newnomeprojeto').html('')
                       $('.newnomeprojeto').append(`${nomeprojeto.value} <p class="text-muted"> Campo atualizado</p>`)
                     },
@@ -536,7 +534,7 @@ $(function () {
                     url: "../Controladores/alterarDadosDoProjeto.php",
                     data: {idprojeto:idprojetoAtualizar ,dado:'areaatuacao', valor: area.value },
                     success: function () {
-                      alert('Atualização feita')
+                      alert('Atualização concluída com sucesso.')
                       $('.newarea').empty()
                       $('.newarea').append(`${area.value} <p class="text-muted"> Campo atualizado</p>`)
                     },
@@ -563,13 +561,12 @@ $(function () {
                 })
                 $('.enviar').click(function () {
                   let idprojetoAtualizar= $(this).parents('.projeto-dados').find("input[name=id]").val()
-                  alert(idprojetoAtualizar)
                   $.ajax({
                     method: "POST",
                     url: "../Controladores/alterarDadosDoProjeto.php",
                     data: {idprojeto:idprojetoAtualizar ,dado:'descricao', valor: descricao.value },
                     success: function () {
-                      alert('Atualização feita')
+                      alert('Atualização concluída com sucesso.')
                       $('.newdescricao').empty()
                       $('.newdescricao').append(`${descricao.value} <p class="text-muted"> Campo atualizado</p>`)
                     },
@@ -598,8 +595,6 @@ $(function () {
           $('.enviar').click(function () {
             let idprojetoAtualizar= $(this).parents('.projeto-dados').find("input[name=id]").val()
             let imagem= $("input[name=imagem]")[0].files;
-            alert(imagem)
-            alert(idprojetoAtualizar) 
             $.ajax({
               method: "POST", 
               url: "../Controladores/alterarDadosDoProjeto.php",
@@ -629,8 +624,8 @@ $(function () {
             dataType: "json",
             data: { idprojeto: idParaVerInvestidores },
             success: function (Investidoresmeuprojeto) {
-              alert("deu certo");
-              $('.cards-projetos').empty();
+              $('.cards-projetos').empty()
+              if(Investidoresmeuprojeto.length>0){
               for (let investidor in Investidoresmeuprojeto) {
                 investidor = parseInt(investidor)
                 $('.cards-projetos').append(`<div class="investidor col-xs-12 co l-sm-6 col-md-4 mt-4" >
@@ -654,10 +649,13 @@ $(function () {
                 </div>
                 `)
               }
+            }else{
+              $('.cards-projetos').append(`<div class= "container text-center h2 mt-5"> Nennhum Investidor para esse projeto ainda  </div>`)
+            }
               $('.cancelarin').click(function () {
                 let id = $(this).parents('.frontside').find("input[name=id]").val();
                 let bt = $(this)
-                if (confirm("deseja realmete excluir investidor")) {
+                if (confirm("Deseja realmente excluir investidor?")) {
                   $.ajax({
                     method: "POST",
                     url: "../Controladores/excluirInvestidor.php",
@@ -693,7 +691,6 @@ $(function () {
       url: "../Controladores/listartop10.php",
       dataType: "json",
       success: function (top) {
-        alert("deu certo");
         $('.cards-projetos').append(`<table class="table table-hover">
               <thead>
                 <tr>
@@ -734,7 +731,6 @@ $(function () {
       url: "../Controladores/MostrarDados.php",
       dataType: "json",
       success: function (dadosPerfil) {
-        alert("deu certo");
         $('.cards-projetos').append(`
               <div class="container mt-3 ">
                     <div class=" add-form row">
@@ -805,7 +801,7 @@ $(function () {
               url: "../Controladores/atualizarDadosUsuarios.php",
               data: { email: email.value },
               success: function () {
-                alert('Atualização feita')
+                alert('Atualização concluída com sucesso.')
                 $('.newemail').empty()
                 $('.newemail').append(`${email.value} <p class="text-muted"> Campo atualizado</p>`)
               },
@@ -837,7 +833,7 @@ $(function () {
               url: "../Controladores/atualizarDadosUsuarios.php",
               data: { localizacao: localizacao.value },
               success: function () {
-                alert('Atualização feita')
+                alert('Atualização concluída com sucesso.')
                 $('.newlocalizacao').empty()
                 $('.newlocalizacao').append(`${localizacao.value} <p class="text-muted"> Campo atualizado</p>`)
               },
@@ -898,7 +894,7 @@ $(function () {
               url: "../Controladores/atualizarDadosUsuarios.php",
               data: { outrosmeiosdecontato: outrosmeiosdecontato.value },
               success: function () {
-                alert('Atualização feita')
+                alert('Atualização concluída com sucesso.')
                 $('.newoutros').empty()
                 $('.newoutros').append(`${outrosmeiosdecontato.value} <p class="text-muted"> Campo atualizado</p>`)
               },

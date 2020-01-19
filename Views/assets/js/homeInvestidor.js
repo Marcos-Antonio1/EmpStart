@@ -13,7 +13,6 @@ $(function () {
       </div>  
   </div>`)
   $('.pro').click(function(){
-    alert('funcionando')
     $.ajax({
         method: "POST",
         url: "../Controladores/buscarTodososProjetos.php",
@@ -145,7 +144,7 @@ $(function () {
                                 success:function(){
                                     $('.sumir').hide()
                                     $('.iniciar-investimento').hide()
-                                    alert("oferta enviada")
+                                    alert("Oferta enviada.")
                                     
                                 },
                                 error:function(){
@@ -159,7 +158,7 @@ $(function () {
                           
                     },
                         error:function(){
-                            alert ("deu errado aki")
+                            alert ("Ocorreu um erro. Recarregue a página.")
                         }
                         
                     })
@@ -194,7 +193,6 @@ $(function () {
             $('.estrela_dois').click(function () {
               $(this).parents('.estrelas').find('.estrela_um').addClass('selecionada')
               $(this).addClass('selecionada')
-               alert('aki')
               let id=$(this).parents('.projetos').find("input[name=id]").val()
               let contexto2=$(this)
               $.ajax({
@@ -294,7 +292,7 @@ $(function () {
             })
         },
         error:function(){
-            alert("algo deu errado por favor recarregue a página")
+            alert("Algo deu errado por favor recarregue a página")
         }
     });
 })
@@ -369,7 +367,6 @@ $(function () {
                                 </div>    
                                       `)
                             $('.solicitar').click(function(){
-                                alert('tão me apertando')
                                 $.ajax({
                                     method:"POST",
                                     url:"../Controladores/solicitarParceria.php",
@@ -385,7 +382,7 @@ $(function () {
                             })
                         },
                         error:function(){
-                            alert('não foi')
+                            alert('Ocorreu um erro interno por favor recarregue a página')
                         }
                     })
                 }) 
@@ -454,31 +451,34 @@ $(function () {
       url: "../Controladores/CarregarProjetosInvestidos.php",
       dataType: "json",
       success: function (myinvestimentos) {
-        for (let myprojets in myinvestimentos) {
-          myprojets = parseInt(myprojets)
-          $('.cards-projetos').append(`<div class="tirar-projeto </div> col-12 col-md-6 mt-md-3" style="max-width: 540px;">
-            <div class="row no-gutters">
-                <div class="col-md-4">
-                <img src="${myinvestimentos[myprojets].imagem}" class="card-img" id='imagem-perfil' alt="">
-                </div>
-                <div class="col-md-8">
-                <div class="card-body ">
-                    <h5 class="card-title">${myinvestimentos[myprojets].nome}</h5>
-                    <p class="card-text">${myinvestimentos[myprojets].descricao}</p>
-                    <p class="card-text"> Score: ${myinvestimentos[myprojets].avaliacao}</p>
-                    <p class="card-text"><small class="text-muted">${myinvestimentos[myprojets].areaatuacao}</small></p>
-                    <input class="" type="hidden" name="id" value="${myinvestimentos[myprojets].idprojeto}">
-                    <a href="#" class=" canc-investimento btn btn-danger btn-sm"><i class="fas fa-user-times"></i> Cancelar Investimento</a>
-                    </div>
-                </div>
-                
-            </div>
-        </div>`)
+        if(myinvestimentos!=null){
+          for (let myprojets in myinvestimentos) {
+            myprojets = parseInt(myprojets)
+            $('.cards-projetos').append(`<div class="tirar-projeto </div> col-12 col-md-6 mt-md-3" style="max-width: 540px;">
+              <div class="row no-gutters">
+                  <div class="col-md-4">
+                  <img src="${myinvestimentos[myprojets].imagem}" class="card-img" id='imagem-perfil' alt="">
+                  </div>
+                  <div class="col-md-8">
+                  <div class="card-body ">
+                      <h5 class="card-title">${myinvestimentos[myprojets].nome}</h5>
+                      <p class="card-text">${myinvestimentos[myprojets].descricao}</p>
+                      <p class="card-text"> Score: ${myinvestimentos[myprojets].avaliacao}</p>
+                      <p class="card-text"><small class="text-muted">${myinvestimentos[myprojets].areaatuacao}</small></p>
+                      <input class="" type="hidden" name="id" value="${myinvestimentos[myprojets].idprojeto}">
+                      <a href="#" class=" canc-investimento btn btn-danger btn-sm"><i class="fas fa-user-times"></i> Cancelar Investimento</a>
+                      </div>
+                  </div>
+                  
+              </div>
+          </div>`)
+          }
+        }else{
+          $('.cards-projetos').append(`<div class= "container text-center h3 mt-5">Nenhum projeto investido ainda </div>`)
         }
         $('.canc-investimento').click(function(){
           let id =$(this).parents('.card-body').find("input[name=id]").val();
           let bt= $(this)
-         alert(id)
          if(confirm("deseja realmete deixar de ser investidor"))
            $.ajax({
              method:"POST",
@@ -507,7 +507,6 @@ $(function () {
       url: "../Controladores/listartop10.php",
       dataType: "json",
       success: function (top) {
-        alert("deu certo");
         $('.cards-projetos').append(`<table class="table table-hover">
               <thead>
                 <tr>
@@ -549,7 +548,6 @@ $(function () {
       url: "../Controladores/MostrarDados.php",
       dataType: "json",
       success: function (dadosPerfil) {
-        alert("deu certo");
         $('.cards-projetos').append(`
         <div class="container mt-3 ">
         <div class=" add-form row">
@@ -734,34 +732,36 @@ $(function () {
        url: "../Controladores/carregarParcerias.php",
        dataType: "json",
        success: function(parceiros){
-          alert("deu certo")
-        for(let parceiro in parceiros){
-          parceiro=parseInt(parceiro)
-         $('.cards-projetos').append(`<div class="investidor col-xs-12 co l-sm-6 col-md-4 mt-4" >
-         <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-             <div>
-                 <div class="frontside">
-                     <div class="card border-0">
-                         <div class="card-body text-center">
-                             <p><img class="img-propocional rounded-circle  img-fluid" src="${parceiros[parceiro].imagem}" alt="card image"></p>
-                             <h4 class="card-title">${parceiros[parceiro].nome}</h4>
-                             <p> Email: ${parceiros[parceiro].email} </p>
-                             <p> Telefone: ${parceiros[parceiro].telefone} </p>
-                             <p> Localização: ${parceiros[parceiro].localizacao} </p>
-                             <input class="idin" type="hidden" name="id" value="${parceiros[parceiro].idinvestidor}">
-                             <a href="#" class=" canc btn btn-danger btn-sm"><i class="fas fa-user-times"></i> Cancelar Parceria</a>
-                         </div>
-                     </div>
-                 </div>
-             </div>
-         </div>
-     </div>
-     `)
+        if(parceiros.length >0){
+          for(let parceiro in parceiros){
+            parceiro=parseInt(parceiro)
+          $('.cards-projetos').append(`<div class="investidor col-xs-12 co l-sm-6 col-md-4 mt-4" >
+          <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+              <div>
+                  <div class="frontside">
+                      <div class="card border-0">
+                          <div class="card-body text-center">
+                              <p><img class="img-propocional rounded-circle  img-fluid" src="${parceiros[parceiro].imagem}" alt="card image"></p>
+                              <h4 class="card-title">${parceiros[parceiro].nome}</h4>
+                              <p> Email: ${parceiros[parceiro].email} </p>
+                              <p> Telefone: ${parceiros[parceiro].telefone} </p>
+                              <p> Localização: ${parceiros[parceiro].localizacao} </p>
+                              <input class="idin" type="hidden" name="id" value="${parceiros[parceiro].idinvestidor}">
+                              <a href="#" class=" canc btn btn-danger btn-sm"><i class="fas fa-user-times"></i> Cancelar Parceria</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      `)
         }
+        }else{
+          $('.cards-projetos').append(`<div class= "container text-center h2 mt-5"> Nennhuma  Parceria estabelecida  </div>`)
+      }
         $('.canc').click(function(){
            let id =$(this).parents('.frontside').find("input[name=id]").val();
            let bt= $(this)
-          alert(id)
           if(confirm("deseja realmete desfazer parceria"))
             $.ajax({
               method:"POST",

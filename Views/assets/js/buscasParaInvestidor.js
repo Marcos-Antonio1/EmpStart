@@ -147,7 +147,7 @@ $(function(){
                               
                         },
                             error:function(){
-                                alert ("deu errado aki")
+                                alert ("Ocorreu um erro. Recarregue a página.")
                             }
                             
                         })
@@ -217,7 +217,6 @@ $(function(){
                                     </div>    
                                           `)
                                 $('.solicitar').click(function(){
-                                    alert('tão me apertando')
                                     $.ajax({
                                         method:"POST",
                                         url:"../Controladores/solicitarParceria.php",
@@ -233,7 +232,7 @@ $(function(){
                                 })
                             },
                             error:function(){
-                                alert('não foi')
+                                alert('Ocorreu um erro. Recarregue a página.')
                             }
                         })
                     }) 
@@ -282,7 +281,7 @@ $(function(){
                                           `)
                             },
                             error:function(){
-                                alert('não foi')
+                                alert('Ocorreu um erro. Recarregue a página.')
                             }
                         })
                     }) 
@@ -312,7 +311,6 @@ $(function(){
                   $('.estrela_dois').click(function () {
                     $(this).parents('.estrelas').find('.estrela_um').addClass('selecionada')
                     $(this).addClass('selecionada')
-                     alert('aki')
                     let id=$(this).parents('.projetos').find("input[name=id]").val()
                     let contexto2=$(this)
                     $.ajax({
@@ -426,7 +424,7 @@ $(function(){
             url:"../Controladores/verpedidosdeparceria.php",
             dataType:"json",
             success:function(Pedidos){
-                alert('deu certo')
+                if(Pedidos.length>0){
                 for(pedido in Pedidos){
                     pedido=parseInt(pedido)
                     $('.cards-projetos').append(`<div class=" tirar container mt-5">
@@ -437,6 +435,7 @@ $(function(){
                         <input class="idin" type="hidden" name="id" value="${Pedidos[pedido].idinvestidor}">
                     </div>
                     </div>`)
+                }
                     $('.aceitar').click(function(){
                         let identificador=$(this).parents('.pedidos').find("input[name=id]").val()
                         identificador=parseInt(identificador)
@@ -454,7 +453,10 @@ $(function(){
 
                         })
                     })
-                }
+                
+            }else{
+                $('.cards-projetos').append(`<div class= "container text-center h2 mt-5"> Nenhum pedido de Parceria  </div>`)
+            }
             },
             error:function(){
 

@@ -81,7 +81,7 @@ $(function(){
                             </div>  `)
                             },
                             error:function(){
-                                alert ("deu errado aki")
+                                alert ("Ocorreu um erro. Recarregue a página.")
                             }
                         })
                     })
@@ -234,7 +234,6 @@ $(function(){
                   $('.estrela_dois').click(function () {
                     $(this).parents('.estrelas').find('.estrela_um').addClass('selecionada')
                     $(this).addClass('selecionada')
-                     alert('aki')
                     let id=$(this).parents('.projetos').find("input[name=id]").val()
                     let contexto2=$(this)
                     $.ajax({
@@ -335,12 +334,11 @@ $(function(){
                 
             },
             error:function(){
-                alert("deu errado");
+                alert("Ocorreu um erro. Recarregue a página.");
             }
         })
     })
     $('.pessoas').click(function(){
-        alert('estou sendo apertado')
         $.ajax({
             method:"POST",
             url:"../Controladores/listartodososusuarios.php",
@@ -393,7 +391,7 @@ $(function(){
                                       `)
                         },
                         error:function(){
-                            alert('não foi')
+                            alert('Ocorreu um erro. Recarregue a página.')
                         }
                     })
                 })
@@ -442,7 +440,7 @@ $(function(){
                                   `)
                     },
                     error:function(){
-                        alert('não foi')
+                        alert('Ocorreu um erro. Recarregue a página.')
                     }
                 })
             }) 

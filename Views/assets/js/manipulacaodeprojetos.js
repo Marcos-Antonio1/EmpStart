@@ -21,6 +21,7 @@ $(document).ready(function(){
                 <option>Mercado Imobiliário</option>
                 <option>Mobilidade urbana</option>
                 <option>Saúde</option>
+                <option>Entreterimento</option>
               </select>
             </div>
             <div class="form-group col-md-9">

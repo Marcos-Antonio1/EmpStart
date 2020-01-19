@@ -84,7 +84,7 @@ $(function(){
                             </div>  `)
                             },
                             error:function(){
-                                alert ("deu errado aki")
+                                alert ("Ocorreu um erro. Recarregue a página.")
                             }
                         })
                     })
@@ -132,7 +132,7 @@ $(function(){
                                           `)
                             },
                             error:function(){
-                                alert('não foi')
+                                alert('Ocorreu um erro. Recarregue a página.')
                             }
                         })
                     }) 
@@ -181,7 +181,7 @@ $(function(){
                                           `)
                             },
                             error:function(){
-                                alert('não foi')
+                                alert('Ocorreu um erro. Recarregue a página.')
                             }
                         })
                     }) 
@@ -211,7 +211,6 @@ $(function(){
                   $('.estrela_dois').click(function () {
                     $(this).parents('.estrelas').find('.estrela_um').addClass('selecionada')
                     $(this).addClass('selecionada')
-                     alert('aki')
                     let id=$(this).parents('.projetos').find("input[name=id]").val()
                     let contexto2=$(this)
                     $.ajax({
@@ -325,8 +324,8 @@ $(function(){
             success:function(pedidosdados){
                 $('.cards-projetos').empty();
                 $('.formulario').hide()
+                if(pedidosdados.length>0){
                 for( let pedido in pedidosdados){
-                alert("deu certo");
                 $('.cards-projetos').append(`<div class=" tirar container mt-5">
                     <div class="pedidos row">
                         <div class="col-4"><img  class=" pequena img-projeto-dados rounded"src="${pedidosdados[pedido].imagem}" alt="..." class="img-thumbnail"></div>
@@ -341,6 +340,10 @@ $(function(){
                         <input class="idin" type="hidden" name="idprojeto" value="${pedidosdados[pedido].projeto_idprojeto}">
                     </div>
                     </div>`)
+                }
+            }else{
+                $('.cards-projetos').append(`<div class= "container text-center h3 mt-5"> Não há nenhuma solicitação de investimento por enquanto</div>`)
+            }
                     $('.inserir').click(function(){
                       let idinvestidor=$(this).parents('.tirar').find("input[name=idinvestidor]").val();
                         idinvestidor=parseInt(idinvestidor)
@@ -360,10 +363,9 @@ $(function(){
 
                         })
                     })
-                }
             },
             error:function(){
-                alert("deu errado");
+                alert("Ocorreu um erro. Recarregue a página.");
             }
         })
     })
